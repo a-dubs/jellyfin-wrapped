@@ -1,4 +1,5 @@
 import "@radix-ui/themes/styles.css";
+import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Theme } from "@radix-ui/themes";
 import {
@@ -6,29 +7,12 @@ import {
   RouterProvider,
   Outlet,
   useLocation,
+  Navigate,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SplashPage from "./components/pages/SplashPage";
 import ServerConfigurationPage from "./components/pages/ServerConfigurationPage";
-import MoviesReviewPage from "./components/pages/MoviesReviewPage";
-import ShowReviewPage from "./components/pages/ShowReviewPage";
-import LiveTvReviewPage from "./components/pages/LiveTvReviewPage";
-import AudioReviewPage from "./components/pages/AudioReviewPage";
-import FavoriteActorsPage from "./components/pages/FavoriteActorsPage";
-import OldestShowPage from "./components/pages/OldestShowPage";
-import OldestMoviePage from "./components/pages/OldestMoviePage";
-import MusicVideoPage from "./components/pages/MusicVideoPage";
-import GenreReviewPage from "./components/pages/GenreReviewPage";
-import MinutesPlayedPerDayPage from "./components/pages/MinutesPlayedPerDayPage";
-import DeviceStatsPage from "./components/pages/DeviceStatsPage";
-import ShowOfTheMonthPage from "./components/pages/ShowOfTheMonthPage";
-import UnfinishedShowsPage from "./components/pages/UnfinishedShowsPage";
-import CriticallyAcclaimedPage from "./components/pages/CriticallyAcclaimedPage";
-import TopTenPage from "./components/pages/TopTenPage";
-import { useEffect } from "react";
-import ActivityCalendarPage from "./components/pages/ActivityCalendarPage";
 import Navigation from "./components/Navigation";
-import { LoadingPage } from "./components/pages/LoadingPage";
 import StoryModePage from "./components/pages/StoryModePage";
 
 const queryClient = new QueryClient({
@@ -60,7 +44,11 @@ function ScrollToTop() {
 
 function RootLayout() {
   return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+    <ErrorBoundary
+      fallback={({ error }: { error: Error }) => (
+        <div>Something went wrong: {error.message}</div>
+      )}
+    >
       <ScrollToTop />
       <QueryClientProvider client={queryClient}>
         <Theme>
@@ -85,76 +73,77 @@ const router = createBrowserRouter([
         element: <ServerConfigurationPage />,
       },
       {
+        path: "/story",
+        element: <StoryModePage />,
+      },
+      // Legacy route redirects - redirect old pages to story mode
+      {
         path: "/loading",
-        element: <LoadingPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/movies",
-        element: <MoviesReviewPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/oldest-show",
-        element: <OldestShowPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/oldest-movie",
-        element: <OldestMoviePage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/shows",
-        element: <ShowReviewPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/tv",
-        element: <LiveTvReviewPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/audio",
-        element: <AudioReviewPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/critically-acclaimed",
-        element: <CriticallyAcclaimedPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/actors",
-        element: <FavoriteActorsPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/music-videos",
-        element: <MusicVideoPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/genres",
-        element: <GenreReviewPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/minutes-per-day",
-        element: <MinutesPlayedPerDayPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/show-of-the-month",
-        element: <ShowOfTheMonthPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/unfinished-shows",
-        element: <UnfinishedShowsPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/device-stats",
-        element: <DeviceStatsPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/punch-card",
-        element: <ActivityCalendarPage />,
+        element: <Navigate to="/story" replace />,
       },
       {
         path: "/TopTen",
-        element: <TopTenPage />,
-      },
-      {
-        path: "/story",
-        element: <StoryModePage />,
+        element: <Navigate to="/story" replace />,
       },
     ],
   },

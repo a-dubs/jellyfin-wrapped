@@ -13,10 +13,19 @@ import {
 } from "../ui/styled";
 import TimeframeSelector from "../TimeframeSelector";
 import { TimeframeOption } from "../../lib/timeframe";
+import {
+  getCacheValue,
+  JELLYFIN_AUTH_TOKEN_CACHE_KEY,
+  JELLYFIN_USERNAME_CACHE_KEY,
+} from "../../lib/cache";
 
-const NEXT_PAGE = "/configure";
 const SplashPage = () => {
   const navigate = useNavigate();
+
+  // Check if user has saved credentials - if so, can go directly to story
+  const hasCredentials =
+    getCacheValue(JELLYFIN_AUTH_TOKEN_CACHE_KEY) ||
+    getCacheValue(JELLYFIN_USERNAME_CACHE_KEY);
 
   // Container animation variants
   const containerVariants = {
@@ -113,10 +122,16 @@ const SplashPage = () => {
         >
           <StyledButton
             onClick={() => {
-              void navigate(NEXT_PAGE);
+              if (hasCredentials) {
+                void navigate("/story");
+              } else {
+                void navigate("/configure");
+              }
             }}
           >
-            Connect Your Jellyfin Server
+            {hasCredentials
+              ? "REVEAL YOUR YEAR"
+              : "Connect Your Jellyfin Server"}
           </StyledButton>
         </motion.div>
 

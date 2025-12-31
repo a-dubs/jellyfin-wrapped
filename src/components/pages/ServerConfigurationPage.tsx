@@ -21,9 +21,9 @@ import { useErrorBoundary } from "react-error-boundary";
 
 import { getEnvVar } from "@/lib/jellyfin-api";
 
-const NEXT_PAGE = "/loading";
+const NEXT_PAGE = "/story";
 
-const ServerConfigurationPage = () => {
+const ServerConfigurationPage = (): JSX.Element => {
   const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
   const serverUrlOverride = getEnvVar("JELLYFIN_SERVER_URL");
@@ -88,7 +88,7 @@ const ServerConfigurationPage = () => {
 
       void navigate(NEXT_PAGE);
     } catch (e) {
-      showBoundary(e);
+      showBoundary(e instanceof Error ? e : new Error(String(e)));
     } finally {
       setIsLoading(false);
     }

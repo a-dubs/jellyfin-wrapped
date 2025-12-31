@@ -13,9 +13,13 @@ export interface ChapterData {
  * Aggregates data needed for all story chapters
  */
 export function useChapterData(): ChapterData {
-  const { data: topTenData, isLoading: topTenLoading } = useTopTen();
-  const { data: movies, isLoading: moviesLoading } = useMovies();
-  const { data: shows, isLoading: showsLoading } = useShows();
+  const {
+    data: topTenData,
+    isLoading: topTenLoading,
+    error: topTenError,
+  } = useTopTen();
+  const { isLoading: moviesLoading, error: moviesError } = useMovies();
+  const { isLoading: showsLoading, error: showsError } = useShows();
 
   const totalMinutes = useMemo(() => {
     if (!topTenData) return 0;
@@ -29,16 +33,17 @@ export function useChapterData(): ChapterData {
 
     // Calculate total minutes from shows
     const showMinutes =
-      topTenData.shows.reduce(
-        (acc, show) => acc + show.playbackTime / 60,
-        0
-      ) || 0;
+      topTenData.shows.reduce((acc, show) => acc + show.playbackTime / 60, 0) ||
+      0;
 
     return movieMinutes + showMinutes;
   }, [topTenData]);
 
   const isLoading = topTenLoading || moviesLoading || showsLoading;
-  const hasError = false; // Could be enhanced to check for actual errors
+  const hasError =
+    (topTenError !== null && topTenError !== undefined) ||
+    (moviesError !== null && moviesError !== undefined) ||
+    (showsError !== null && showsError !== undefined);
 
   return {
     totalMinutes,
