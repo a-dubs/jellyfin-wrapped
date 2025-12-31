@@ -26,10 +26,7 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
   const genreData = useMemo(() => {
     if (!movies || !shows) return null;
 
-    const allItems = [
-      ...movies,
-      ...shows.map((show) => show.item),
-    ];
+    const allItems = [...movies, ...shows.map((show) => show.item)];
 
     const genreCounts = new Map<string, number>();
     allItems.forEach((item) => {
@@ -42,7 +39,10 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
 
     const totalItems = allItems.length;
     const genres = prepareGenreData(genreCounts, totalItems);
-    const topGenreData = getTopGenre(movies, shows.map((s) => s.item));
+    const topGenreData = getTopGenre(
+      movies,
+      shows.map((s) => s.item)
+    );
 
     if (!topGenreData) return null;
 
@@ -55,8 +55,7 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
     };
 
     const personalityLabel = getPersonalityLabel(topGenreData.genre);
-    const topItem =
-      topGenreData.items[0]?.name || "your favorite content";
+    const topItem = topGenreData.items[0]?.name || "your favorite content";
     const flavorText = generateFlavorText(
       topGenreData.genre,
       topGenreData.count,
@@ -78,6 +77,7 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
         chapterNumber={4}
         background="void"
         accentColor="cyan"
+        chapterTitle="Your Genres"
         isActive={isActive}
       >
         <LoadingSpinner />
@@ -92,6 +92,7 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
         chapterNumber={4}
         background="void"
         accentColor="cyan"
+        chapterTitle="Your Genres"
         isActive={isActive}
       >
         <div className="genres-error">
@@ -108,6 +109,7 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
       background="aurora"
       accentColor="cyan"
       showSwipeHint={true}
+      chapterTitle="Your Genres"
       isActive={isActive}
     >
       <div className="genres-chapter">
@@ -117,13 +119,17 @@ export const GenresChapter = ({ isActive = false }: GenresChapterProps) => {
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="genres-title">YOUR TASTE IN {new Date().getFullYear()}</h2>
+          <h2 className="genres-title">
+            YOUR TASTE IN {new Date().getFullYear()}
+          </h2>
         </motion.div>
 
         <motion.div
           className="genres-chart-wrapper"
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          animate={
+            isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+          }
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <GenrePieChart

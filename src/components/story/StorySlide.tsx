@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode, useEffect } from "react";
 import { AuroraBackground, GrainOverlay } from "../effects";
+import { ChapterShareButton } from "./ChapterShareButton";
 import { getMotionConfig, shouldShowEffects } from "@/lib/motion-config";
 import "./StorySlide.css";
 
@@ -25,6 +26,10 @@ interface StorySlideProps {
   showProgress?: boolean;
   /** Whether to show swipe hint */
   showSwipeHint?: boolean;
+  /** Whether to show share button */
+  showShareButton?: boolean;
+  /** Chapter title for share functionality */
+  chapterTitle?: string;
   /** Content */
   children: ReactNode;
   /** Callback when slide becomes active */
@@ -68,6 +73,8 @@ export const StorySlide = ({
   background = "void",
   accentColor = "gold",
   showSwipeHint = false,
+  showShareButton = true,
+  chapterTitle,
   children,
   onEnter,
   onExit,
@@ -102,6 +109,14 @@ export const StorySlide = ({
     >
       {background === "aurora" && shouldShowEffects() && <AuroraBackground />}
       {shouldShowEffects() && <GrainOverlay opacity={0.03} />}
+      {showShareButton && chapterTitle && (
+        <ChapterShareButton
+          chapterId={chapterId}
+          chapterNumber={chapterNumber}
+          chapterTitle={chapterTitle}
+          isActive={isActive}
+        />
+      )}
       <div className="story-slide-content">{children}</div>
       {showSwipeHint && (
         <div className="story-slide-hint" aria-hidden="true">

@@ -82,6 +82,7 @@ export const JourneyChapter = ({ isActive = false }: JourneyChapterProps) => {
       chapterNumber={7}
       background="aurora"
       accentColor="cyan"
+      chapterTitle="The Journey"
       isActive={isActive}
     >
       <div className="journey-chapter">

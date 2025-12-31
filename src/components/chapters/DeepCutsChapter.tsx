@@ -94,6 +94,7 @@ export const DeepCutsChapter = ({ isActive = false }: DeepCutsChapterProps) => {
       chapterNumber={6}
       background="gradient-hero"
       accentColor="coral"
+      chapterTitle="Deep Cuts"
       isActive={isActive}
     >
       <div className="deep-cuts-chapter">

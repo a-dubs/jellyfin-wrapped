@@ -104,6 +104,7 @@ export const BigNumberChapter = ({
       background="aurora"
       accentColor="gold"
       showSwipeHint={true}
+      chapterTitle="The Big Number"
       isActive={isActive}
     >
       <div className="big-number-chapter">

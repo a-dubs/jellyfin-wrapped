@@ -50,6 +50,7 @@ export const FunFactsChapter = ({ isActive = false }: FunFactsChapterProps) => {
       chapterNumber={8}
       background="void"
       accentColor="magenta"
+      chapterTitle="Fun Facts"
       isActive={isActive}
     >
       <div className="fun-facts-chapter">

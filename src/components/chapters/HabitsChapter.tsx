@@ -79,6 +79,7 @@ export const HabitsChapter = ({ isActive = false }: HabitsChapterProps) => {
       chapterNumber={5}
       background="void"
       accentColor="electric"
+      chapterTitle="Viewing Habits"
       isActive={isActive}
     >
       <div className="habits-chapter">

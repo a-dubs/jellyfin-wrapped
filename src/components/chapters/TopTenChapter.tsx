@@ -114,6 +114,7 @@ export const TopTenChapter = ({ isActive = false }: TopTenChapterProps) => {
       chapterNumber={3}
       background="gradient-hero"
       accentColor="gold"
+      chapterTitle="Your Top 10"
       showSwipeHint={true}
       isActive={isActive}
     >
@@ -133,7 +134,9 @@ export const TopTenChapter = ({ isActive = false }: TopTenChapterProps) => {
         <motion.div
           className="top-ten-carousel-wrapper"
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+          animate={
+            isActive ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+          }
           transition={{ delay: 0.3, duration: 0.6 }}
         >
           <TopTenCarousel items={topTenItems} />

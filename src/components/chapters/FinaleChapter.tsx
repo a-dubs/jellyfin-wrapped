@@ -121,6 +121,7 @@ export const FinaleChapter = ({ isActive = false }: FinaleChapterProps) => {
       chapterNumber={9}
       background="gradient-gold"
       accentColor="gold"
+      chapterTitle="The Finale"
       isActive={isActive}
     >
       <div className="finale-chapter">

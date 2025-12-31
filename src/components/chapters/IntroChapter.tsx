@@ -89,6 +89,8 @@ export const IntroChapter = ({
       background="gradient-hero"
       accentColor="gold"
       showSwipeHint={false}
+      showShareButton={false}
+      chapterTitle="Intro"
       isActive={isActive}
     >
       <div className="intro-chapter">
