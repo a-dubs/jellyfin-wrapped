@@ -1,0 +1,167 @@
+.genre-pie-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xl);
+  width: 100%;
+  max-width: 800px;
+}
+
+.genre-chart-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.genre-svg {
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+}
+
+.genre-segment {
+  transition: all var(--duration-normal) ease-out;
+}
+
+.genre-segment:hover {
+  opacity: 0.9;
+  filter: brightness(1.1);
+}
+
+.genre-segment.selected {
+  filter: brightness(1.2) drop-shadow(0 0 10px currentColor);
+}
+
+.genre-center-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.genre-top-icon {
+  font-size: 2.5em;
+  margin-bottom: var(--space-xs);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.genre-top-name {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--space-xs);
+}
+
+.genre-top-percentage {
+  font-family: var(--font-mono);
+  font-size: var(--text-subtitle);
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.genre-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 400px;
+}
+
+.genre-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--duration-normal) ease-out;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.genre-legend-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.genre-legend-item.selected {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--accent-gold);
+}
+
+.genre-legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.genre-legend-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  font-family: var(--font-display);
+}
+
+.genre-legend-name {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.genre-legend-percentage {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+.genre-personality {
+  text-align: center;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.personality-label {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-gold);
+  margin-bottom: var(--space-md);
+  filter: drop-shadow(var(--glow-gold));
+}
+
+.personality-text {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .genre-svg {
+    max-width: 250px;
+  }
+
+  .genre-top-icon {
+    font-size: 2em;
+  }
+
+  .genre-top-name {
+    font-size: 0.875rem;
+  }
+
+  .genre-top-percentage {
+    font-size: 1.25rem;
+  }
+}

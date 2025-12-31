@@ -17,8 +17,12 @@ const Navigation = () => {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Don't show navigation on splash or configuration pages
-  if (location.pathname === "/" || location.pathname === "/configure") {
+  // Don't show navigation on splash, configuration, or story mode pages
+  if (
+    location.pathname === "/" ||
+    location.pathname === "/configure" ||
+    location.pathname === "/story"
+  ) {
     return null;
   }
 

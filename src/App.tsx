@@ -29,6 +29,7 @@ import { useEffect } from "react";
 import ActivityCalendarPage from "./components/pages/ActivityCalendarPage";
 import Navigation from "./components/Navigation";
 import { LoadingPage } from "./components/pages/LoadingPage";
+import StoryModePage from "./components/pages/StoryModePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -150,6 +151,10 @@ const router = createBrowserRouter([
       {
         path: "/TopTen",
         element: <TopTenPage />,
+      },
+      {
+        path: "/story",
+        element: <StoryModePage />,
       },
     ],
   },

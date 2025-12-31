@@ -1,0 +1,42 @@
+.genres-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  padding: var(--space-xl);
+}
+
+.genres-header {
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+}
+
+.genres-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.genres-chart-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.genres-error {
+  text-align: center;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+}
+
+@media (max-width: 640px) {
+  .genres-title {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+  }
+}
