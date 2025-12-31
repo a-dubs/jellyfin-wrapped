@@ -1,7 +1,12 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import { StorySlide } from "../story";
-import { AnimatedNumber, ComparisonList, ComparisonItem } from "../visualizations";
+import {
+  AnimatedNumber,
+  ComparisonList,
+  ComparisonItem,
+} from "../visualizations";
+import { announceToScreenReader } from "@/lib/accessibility";
 import "./BigNumberChapter.css";
 
 interface BigNumberChapterProps {
@@ -18,7 +23,6 @@ export const BigNumberChapter = ({
   const comparisons = useMemo<ComparisonItem[]>(() => {
     const hours = totalMinutes / 60;
     const days = hours / 24;
-    const weeks = days / 7;
     const months = days / 30;
 
     const items: ComparisonItem[] = [];
@@ -79,6 +83,20 @@ export const BigNumberChapter = ({
 
   const totalHours = Math.round(totalMinutes / 60);
 
+  // Announce to screen readers when chapter becomes active
+  useEffect(() => {
+    if (isActive) {
+      // Delay announcement to allow animation to complete
+      const timer = setTimeout(() => {
+        announceToScreenReader(
+          `You watched ${totalHours.toLocaleString()} hours this year`
+        );
+      }, 3000); // After animation completes
+
+      return () => clearTimeout(timer);
+    }
+  }, [isActive, totalHours]);
+
   return (
     <StorySlide
       chapterId="chapter-2"
@@ -126,7 +144,11 @@ export const BigNumberChapter = ({
           >
             That's equivalent to:
           </motion.p>
-          <ComparisonList items={comparisons} animate={isActive} initialDelay={3.8} />
+          <ComparisonList
+            items={comparisons}
+            animate={isActive}
+            initialDelay={3.8}
+          />
         </div>
       </div>
     </StorySlide>

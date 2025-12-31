@@ -1,3 +1,8 @@
+/**
+ * @deprecated This page is deprecated and will be removed in v2.1
+ * Old route `/movies` redirects to `/story/top-ten`
+ * See DEPRECATED_PAGES.md for migration details
+ */
 import { useState } from "react";
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
@@ -12,6 +17,7 @@ import { getCachedHiddenIds, setCachedHiddenId } from "@/lib/cache";
 import { generateGuid } from "@/lib/utils";
 import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
+/** @deprecated Use StoryModePage instead */
 export default function MoviesReviewPage() {
   const { showBoundary } = useErrorBoundary();
   const { data: movies, isLoading, error } = useMovies();
@@ -49,7 +55,13 @@ export default function MoviesReviewPage() {
             <Title as={motion.h1} variants={itemVariants}>
               You Watched {visibleMovies.length} Movies
             </Title>
-            <p style={{ fontSize: "1.125rem", color: "var(--gray-11)", marginTop: "0.5rem" }}>
+            <p
+              style={{
+                fontSize: "1.125rem",
+                color: "var(--gray-11)",
+                marginTop: "0.5rem",
+              }}
+            >
               Your complete movie viewing history
             </p>
           </div>

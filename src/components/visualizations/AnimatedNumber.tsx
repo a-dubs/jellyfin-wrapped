@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
+import { prefersReducedMotion, shouldShowEffects } from "@/lib/motion-config";
 import "./AnimatedNumber.css";
 
 interface AnimatedNumberProps {
@@ -37,11 +38,15 @@ export const AnimatedNumber = ({
   className = "",
 }: AnimatedNumberProps) => {
   const [isComplete, setIsComplete] = useState(false);
-  const motionValue = useMotionValue(0);
+  const reducedMotion = prefersReducedMotion();
+  const effectiveDuration = reducedMotion ? 0 : duration;
+  const effectiveDelay = reducedMotion ? 0 : delay;
+
+  const motionValue = useMotionValue(reducedMotion ? value : 0);
   const springValue = useSpring(motionValue, {
     damping: 30,
     stiffness: 100,
-    duration: duration * 1000,
+    duration: effectiveDuration * 1000,
   });
 
   const displayValue = useTransform(springValue, (latest) => {
@@ -49,18 +54,30 @@ export const AnimatedNumber = ({
   });
 
   useEffect(() => {
+    if (reducedMotion) {
+      motionValue.set(value);
+      setIsComplete(true);
+      return;
+    }
+
     const timeout = setTimeout(() => {
       motionValue.set(value);
-    }, delay * 1000);
+    }, effectiveDelay * 1000);
 
     return () => clearTimeout(timeout);
-  }, [value, delay, motionValue]);
+  }, [value, effectiveDelay, motionValue, reducedMotion]);
 
   useEffect(() => {
-    const unsubscribe = springValue.on("change", (latest) => {
+    if (reducedMotion) {
+      setIsComplete(true);
+      return;
+    }
+
+    const unsubscribe = springValue.on("change", (latest: number) => {
       if (Math.abs(latest - value) < 0.1 && !isComplete) {
         setIsComplete(true);
-        if (confettiOnComplete) {
+        if (confettiOnComplete && shouldShowEffects()) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           confetti({
             particleCount: 100,
             spread: 70,
@@ -71,8 +88,13 @@ export const AnimatedNumber = ({
       }
     });
 
-    return () => unsubscribe();
-  }, [springValue, value, isComplete, confettiOnComplete]);
+    return () => {
+       
+      if (typeof unsubscribe === "function") {
+        unsubscribe();
+      }
+    };
+  }, [springValue, value, isComplete, confettiOnComplete, reducedMotion]);
 
   return (
     <div className={`animated-number animated-number-${size} ${className}`}>
@@ -82,8 +104,8 @@ export const AnimatedNumber = ({
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
-          duration: 0.5,
-          delay,
+          duration: reducedMotion ? 0 : 0.5,
+          delay: effectiveDelay,
           ease: "easeOut",
         }}
       >
@@ -100,8 +122,8 @@ export const AnimatedNumber = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
-            duration: 0.5,
-            delay: delay + duration * 0.7,
+            duration: reducedMotion ? 0 : 0.5,
+            delay: reducedMotion ? 0 : effectiveDelay + effectiveDuration * 0.7,
             ease: "easeOut",
           }}
         >

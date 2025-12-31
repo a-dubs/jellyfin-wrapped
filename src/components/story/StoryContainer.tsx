@@ -98,7 +98,8 @@ export const StoryContainer = ({
     };
   }, []);
 
-  // Swipe handlers
+  // Swipe handlers with optimized mobile gestures
+  // Based on UI_UX_OVERHAUL.md Appendix J.6.2
   const handlers = useSwipeable({
     onSwipedUp: (e) => {
       e.event.preventDefault();
@@ -111,7 +112,8 @@ export const StoryContainer = ({
     trackMouse: false,
     trackTouch: true,
     preventScrollOnSwipe: true,
-    delta: 50, // Minimum swipe distance
+    delta: 50, // Minimum swipe distance (50px)
+    velocity: 0.3, // Minimum velocity (pixels/ms)
   });
 
   // Map children to add active class

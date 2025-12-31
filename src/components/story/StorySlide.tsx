@@ -1,6 +1,7 @@
 import { motion, Variants } from "framer-motion";
 import { ReactNode, useEffect } from "react";
 import { AuroraBackground, GrainOverlay } from "../effects";
+import { getMotionConfig, shouldShowEffects } from "@/lib/motion-config";
 import "./StorySlide.css";
 
 export type BackgroundVariant =
@@ -9,12 +10,7 @@ export type BackgroundVariant =
   | "gradient-gold"
   | "gradient-hero";
 
-export type AccentColor =
-  | "gold"
-  | "coral"
-  | "cyan"
-  | "magenta"
-  | "electric";
+export type AccentColor = "gold" | "coral" | "cyan" | "magenta" | "electric";
 
 interface StorySlideProps {
   /** Unique chapter identifier */
@@ -71,7 +67,6 @@ export const StorySlide = ({
   chapterNumber,
   background = "void",
   accentColor = "gold",
-  showProgress = false,
   showSwipeHint = false,
   children,
   onEnter,
@@ -99,16 +94,14 @@ export const StorySlide = ({
       initial="initial"
       animate="animate"
       exit="exit"
-      transition={{
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
+      transition={getMotionConfig().transition}
       id={chapterId}
       role="region"
       aria-label={`Chapter ${chapterNumber}`}
+      aria-live={isActive ? "polite" : "off"}
     >
-      {background === "aurora" && <AuroraBackground />}
-      <GrainOverlay opacity={0.03} />
+      {background === "aurora" && shouldShowEffects() && <AuroraBackground />}
+      {shouldShowEffects() && <GrainOverlay opacity={0.03} />}
       <div className="story-slide-content">{children}</div>
       {showSwipeHint && (
         <div className="story-slide-hint" aria-hidden="true">
