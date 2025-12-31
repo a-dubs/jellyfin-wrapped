@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { getCurrentTimeframe } from "../timeframe";
-import { getAdminJellyfinApi, getEnvVar } from "../jellyfin-api";
+import { getAuthenticatedJellyfinApi, getBackendApiUrl } from "../jellyfin-api";
 
 export const getStartDate = (): Date => {
   return getCurrentTimeframe().startDate;
@@ -39,26 +39,38 @@ export const playbackReportingSqlRequest = async (
   colums: string[];
   results: string[][];
 }> => {
-  const adminApi = getAdminJellyfinApi();
-  const res = await fetch(
-    `${adminApi.basePath}/user_usage_stats/submit_custom_query?stamp=${Date.now()}`,
-    {
-      method: "POST",
-      headers: {
-        "X-Emby-Token": `${getEnvVar("JELLYFIN_API_KEY")}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        CustomQueryString: queryString,
-        ReplaceUserId: true,
-      }),
-    }
-  );
+  // Get user's auth token (not admin key!)
+  const authenticatedApi = await getAuthenticatedJellyfinApi();
+  const userAuthToken = authenticatedApi.accessToken;
+
+  if (!userAuthToken) {
+    throw new Error("User authentication required");
+  }
+
+  // Call backend API instead of Jellyfin directly
+  const backendUrl = getBackendApiUrl();
+  const res = await fetch(`${backendUrl}/playback-reporting/query`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-User-Auth-Token": userAuthToken, // User token, not admin key
+    },
+    body: JSON.stringify({
+      queryString,
+    }),
+  });
+
+  if (!res.ok) {
+    const errorResponse = (await res
+      .json()
+      .catch(() => ({ error: "Unknown error" }))) as { error?: string };
+    throw new Error(errorResponse.error || `HTTP ${res.status}`);
+  }
 
   const text = await res.text();
 
   if (!text) {
-    throw new Error("Empty response from Jellyfin server");
+    throw new Error("Empty response from backend");
   }
 
   try {

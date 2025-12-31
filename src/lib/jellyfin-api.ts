@@ -9,7 +9,6 @@ import {
 } from "./cache";
 
 let api: Api | null = null;
-let adminApi: Api | null = null;
 const sleep = (durationMs: number) =>
   new Promise((resolve) => setTimeout(resolve, durationMs));
 
@@ -24,6 +23,11 @@ export const getEnvVar = (name: string): string | undefined => {
   return import.meta.env[`VITE_${name}`] as string | undefined;
 };
 
+// Get backend API URL
+export const getBackendApiUrl = (): string => {
+  return getEnvVar("BACKEND_API_URL") || "/api";
+};
+
 const getServerUrl = (): string => {
   const envServerUrl = getEnvVar("JELLYFIN_SERVER_URL");
   if (envServerUrl) {
@@ -36,22 +40,6 @@ const getServerUrl = (): string => {
   }
 
   return cachedServerUrl;
-};
-
-const getAdminApiKey = (): string => {
-  const adminApiKey = getEnvVar("JELLYFIN_API_KEY");
-  if (!adminApiKey) {
-    throw new Error("JELLYFIN_API_KEY environment variable is required");
-  }
-  return adminApiKey;
-};
-
-export const getAdminJellyfinApi = (): Api => {
-  const serverUrl = getServerUrl();
-  const apiKey = getAdminApiKey();
-
-  adminApi = authenticateByAuthToken(serverUrl, apiKey);
-  return adminApi;
 };
 export const getAuthenticatedJellyfinApi = async (): Promise<Api> => {
   if (api && api.accessToken) {

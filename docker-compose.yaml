@@ -3,12 +3,12 @@ version: "3"
 services:
   web:
     # Build docker image from source
-    # build:
-    #   context: .
-    #   dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Dockerfile
 
-    # ...Or use published image from Dockerhub
-    image: mrorbitman/jellyfin-wrapped:latest
+    # ...Or use published image from Dockerhub (after backend changes are published)
+    # image: mrorbitman/jellyfin-wrapped:latest
 
     ports:
       - "80:80"
@@ -16,5 +16,11 @@ services:
     container_name: jellyfin-wrapped
     # Required environment variables for Jellyfin Wrapped to function properly
     environment:
+      # Public (can be exposed to frontend)
       - JELLYFIN_SERVER_URL=http://<your_jellyfin_server>:8096
+      - FRONTEND_URL=http://localhost
+      # Private (backend only, NOT exposed to frontend)
       - JELLYFIN_API_KEY=<your_admin_api_key>
+      - BACKEND_PORT=3000
+      # Optional: Override backend API URL if needed
+      # - BACKEND_API_URL=/api
