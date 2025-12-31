@@ -20,6 +20,10 @@ export const StoryModePage = () => {
     setCurrentChapter(2); // Move to Big Number chapter
   };
 
+  const handleChapterChange = (chapter: number) => {
+    setCurrentChapter(chapter);
+  };
+
   if (isLoading && currentChapter > 1) {
     return <LoadingSpinner />;
   }
@@ -27,8 +31,8 @@ export const StoryModePage = () => {
   return (
     <StoryContainer
       totalChapters={TOTAL_CHAPTERS}
-      onChapterChange={setCurrentChapter}
-      initialChapter={currentChapter}
+      onChapterChange={handleChapterChange}
+      currentChapter={currentChapter}
     >
       <IntroChapter
         year={year}

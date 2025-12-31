@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect, useCallback } from "react";
+import { ReactNode, useEffect, useCallback } from "react";
 import { useSwipeable } from "react-swipeable";
 import { StoryProgress } from "./StoryProgress";
 import "./StoryContainer.css";
@@ -10,22 +10,19 @@ interface StoryContainerProps {
   children: ReactNode;
   /** Callback when chapter changes */
   onChapterChange?: (chapter: number) => void;
-  /** Initial chapter (defaults to 1) */
-  initialChapter?: number;
+  /** Current chapter (controlled by parent) */
+  currentChapter: number;
 }
 
 export const StoryContainer = ({
   totalChapters,
   children,
   onChapterChange,
-  initialChapter = 1,
+  currentChapter,
 }: StoryContainerProps) => {
-  const [currentChapter, setCurrentChapter] = useState(initialChapter);
-
   const goToChapter = useCallback(
     (chapter: number) => {
       if (chapter >= 1 && chapter <= totalChapters) {
-        setCurrentChapter(chapter);
         onChapterChange?.(chapter);
       }
     },
@@ -75,23 +72,57 @@ export const StoryContainer = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentChapter, totalChapters, goToNext, goToPrevious, goToChapter]);
 
+  // Prevent default scroll behavior and lock body scroll
+  useEffect(() => {
+    const preventScroll = (e: WheelEvent | TouchEvent) => {
+      e.preventDefault();
+    };
+
+    // Add class to body to prevent scrolling
+    document.body.classList.add("story-mode-active");
+
+    // Prevent wheel scrolling
+    window.addEventListener("wheel", preventScroll, { passive: false });
+    // Prevent touch scrolling
+    window.addEventListener("touchmove", preventScroll, { passive: false });
+
+    return () => {
+      document.body.classList.remove("story-mode-active");
+      window.removeEventListener("wheel", preventScroll);
+      window.removeEventListener("touchmove", preventScroll);
+    };
+  }, []);
+
   // Swipe handlers
   const handlers = useSwipeable({
-    onSwipedUp: goToNext,
-    onSwipedDown: goToPrevious,
+    onSwipedUp: (e) => {
+      e.event.preventDefault();
+      goToNext();
+    },
+    onSwipedDown: (e) => {
+      e.event.preventDefault();
+      goToPrevious();
+    },
     trackMouse: false,
     trackTouch: true,
     preventScrollOnSwipe: true,
     delta: 50, // Minimum swipe distance
   });
 
-  // Scroll to current chapter
-  useEffect(() => {
-    const currentSlide = document.getElementById(`chapter-${currentChapter}`);
-    if (currentSlide) {
-      currentSlide.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }, [currentChapter]);
+  // Map children to add active class
+  const slidesWithActive = Array.isArray(children)
+    ? children.map((child, index) => {
+        const chapterNum = index + 1;
+        return (
+          <div
+            key={chapterNum}
+            className={currentChapter === chapterNum ? "active" : ""}
+          >
+            {child}
+          </div>
+        );
+      })
+    : children;
 
   return (
     <div className="story-container" {...handlers}>
@@ -100,7 +131,7 @@ export const StoryContainer = ({
         currentChapter={currentChapter}
         position="bottom"
       />
-      <div className="story-container-slides">{children}</div>
+      <div className="story-container-slides">{slidesWithActive}</div>
     </div>
   );
 };
