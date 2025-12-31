@@ -1,0 +1,50 @@
+/* Toast styles matching Midnight Premiere design system */
+
+/* Override react-hot-toast default styles */
+:root {
+  --toast-bg: var(--bg-elevated);
+  --toast-border: var(--accent-gold);
+  --toast-text: var(--text-primary);
+  --toast-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.react-hot-toast {
+  font-family: var(--font-display);
+  background: var(--bg-elevated) !important;
+  color: var(--text-primary) !important;
+  border: 2px solid var(--accent-gold) !important;
+  border-radius: 12px !important;
+  padding: 16px 20px !important;
+  box-shadow: var(--toast-shadow), var(--glow-gold) !important;
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  min-width: 280px;
+  max-width: 400px;
+}
+
+.react-hot-toast-icon {
+  color: var(--accent-gold) !important;
+}
+
+.react-hot-toast-success {
+  border-color: var(--accent-gold) !important;
+}
+
+.react-hot-toast-error {
+  border-color: var(--accent-coral) !important;
+  box-shadow: var(--toast-shadow), 0 0 40px rgba(255, 107, 107, 0.3) !important;
+}
+
+.react-hot-toast-error .react-hot-toast-icon {
+  color: var(--accent-coral) !important;
+}
+
+/* Animation respects reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .react-hot-toast {
+    animation: none !important;
+    transition: opacity 0.2s !important;
+  }
+}

@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 import { StorySlide } from "../story";
 import { ShareCard } from "../visualizations/ShareCard";
 import { useChapterData } from "@/hooks/story/useChapterData";
@@ -35,8 +36,10 @@ export const FinaleChapter = ({ isActive = false }: FinaleChapterProps) => {
       link.download = `jellyfin-wrapped-${year}.png`;
       link.href = dataUrl;
       link.click();
+      toast.success("Download started!");
     } catch (error) {
       console.error("Failed to download image:", error);
+      toast.error("Failed to download image. Please try again.");
     }
   };
 
@@ -79,14 +82,16 @@ export const FinaleChapter = ({ isActive = false }: FinaleChapterProps) => {
             "image/png": blob,
           }),
         ]);
-        alert("Image copied to clipboard!");
+        toast.success("Image copied to clipboard!");
       } catch (clipboardError) {
         console.error("Failed to copy to clipboard:", clipboardError);
+        toast.error("Failed to copy to clipboard. Downloading instead...");
         // Final fallback: download
         void handleDownload();
       }
     } catch (error) {
       console.error("Failed to share:", error);
+      toast.error("Share failed. Downloading instead...");
       // Fallback to download
       void handleDownload();
     }

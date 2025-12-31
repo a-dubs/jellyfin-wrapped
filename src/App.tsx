@@ -2,6 +2,7 @@ import "@radix-ui/themes/styles.css";
 import { useEffect } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Theme } from "@radix-ui/themes";
+import { Toaster } from "react-hot-toast";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -14,6 +15,7 @@ import SplashPage from "./components/pages/SplashPage";
 import ServerConfigurationPage from "./components/pages/ServerConfigurationPage";
 import Navigation from "./components/Navigation";
 import StoryModePage from "./components/pages/StoryModePage";
+import "./styles/toast.css";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,6 +56,29 @@ function RootLayout() {
         <Theme>
           <Navigation />
           <Outlet />
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: "var(--bg-elevated)",
+                color: "var(--text-primary)",
+                border: "2px solid var(--accent-gold)",
+              },
+              success: {
+                iconTheme: {
+                  primary: "var(--accent-gold)",
+                  secondary: "var(--bg-elevated)",
+                },
+              },
+              error: {
+                iconTheme: {
+                  primary: "var(--accent-coral)",
+                  secondary: "var(--bg-elevated)",
+                },
+              },
+            }}
+          />
         </Theme>
       </QueryClientProvider>
     </ErrorBoundary>
