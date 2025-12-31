@@ -1,0 +1,10 @@
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  background-size: 400px 400px;
+  animation: grain 0.8s steps(10) infinite;
+  will-change: transform;
+}

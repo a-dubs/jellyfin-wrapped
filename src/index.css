@@ -1,6 +1,26 @@
+@import "./styles/fonts.css";
+@import "./styles/tokens.css";
+@import "./styles/animations.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: var(--bg-void);
 }

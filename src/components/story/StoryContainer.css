@@ -1,0 +1,29 @@
+.story-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.story-container-slides {
+  display: flex;
+  flex-direction: column;
+}
+
+.story-container-slides > * {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Hide scrollbar but keep functionality */
+.story-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.story-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

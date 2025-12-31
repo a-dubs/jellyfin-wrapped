@@ -1,0 +1,46 @@
+.aurora-background {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: aurora 15s ease-in-out infinite alternate;
+}
+
+.aurora-layer-1 {
+  background: radial-gradient(
+    ellipse at 20% 50%,
+    rgba(196, 76, 255, 0.15) 0%,
+    transparent 50%
+  );
+  animation-duration: 15s;
+  animation-delay: 0s;
+}
+
+.aurora-layer-2 {
+  background: radial-gradient(
+    ellipse at 80% 20%,
+    rgba(78, 205, 196, 0.15) 0%,
+    transparent 50%
+  );
+  animation-duration: 20s;
+  animation-delay: -5s;
+}
+
+.aurora-layer-3 {
+  background: radial-gradient(
+    ellipse at 60% 80%,
+    rgba(255, 217, 61, 0.1) 0%,
+    transparent 50%
+  );
+  animation-duration: 25s;
+  animation-delay: -10s;
+}

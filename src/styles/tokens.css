@@ -1,0 +1,90 @@
+:root {
+  /* Base - Deep, rich blacks and dark grays */
+  --bg-void: #0A0A0B;
+  --bg-surface: #121214;
+  --bg-elevated: #1A1A1E;
+  --bg-overlay: rgba(0, 0, 0, 0.8);
+
+  /* Accent Lighting - Neon cinema vibes */
+  --accent-gold: #FFD93D;
+  --accent-coral: #FF6B6B;
+  --accent-cyan: #4ECDC4;
+  --accent-magenta: #C44CFF;
+  --accent-electric: #6C63FF;
+
+  /* Gradients - For dramatic backgrounds */
+  --gradient-hero: linear-gradient(135deg, #0A0A0B 0%, #1A1A2E 50%, #16213E 100%);
+  --gradient-gold: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
+  --gradient-aurora: linear-gradient(
+    180deg,
+    #0A0A0B 0%,
+    #1A1A2E 30%,
+    #2A1A4E 60%,
+    #0A0A0B 100%
+  );
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
+  /* Glow Effects */
+  --glow-gold: 0 0 60px rgba(255, 217, 61, 0.4);
+  --glow-cyan: 0 0 60px rgba(78, 205, 196, 0.4);
+  --glow-magenta: 0 0 60px rgba(196, 76, 255, 0.4);
+  --glow-electric: 0 0 60px rgba(108, 99, 255, 0.4);
+
+  /* Typography */
+  --font-display: "Clash Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
+
+  /* Type Scale */
+  --text-hero: clamp(4rem, 15vw, 12rem);
+  --text-title: clamp(2rem, 6vw, 4rem);
+  --text-subtitle: clamp(1.25rem, 3vw, 2rem);
+  --text-stat: clamp(3rem, 10vw, 8rem);
+  --text-body: clamp(1rem, 2vw, 1.25rem);
+  --text-caption: 0.875rem;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Animation Durations */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 600ms;
+  --duration-reveal: 800ms;
+  --duration-dramatic: 1200ms;
+
+  /* Animation Easings */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  /* Responsive Breakpoints */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0ms;
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-reveal: 0ms;
+    --duration-dramatic: 0ms;
+  }
+}

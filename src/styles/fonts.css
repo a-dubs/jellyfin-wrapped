@@ -1,0 +1,17 @@
+/* Font Loading - Clash Display + Space Mono */
+@import url("https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=space-mono@400,700&display=swap");
+
+/* Fallback font stack */
+@font-face {
+  font-family: "Clash Display";
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}

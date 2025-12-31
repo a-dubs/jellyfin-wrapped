@@ -1,0 +1,44 @@
+.animated-number {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.animated-number-hero {
+  font-size: var(--text-hero);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.animated-number-stat {
+  font-size: var(--text-stat);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.animated-number-value {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-coral) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(var(--glow-gold));
+}
+
+.animated-number-text {
+  display: inline-block;
+}
+
+.animated-number-unit {
+  margin-top: var(--space-md);
+  font-size: var(--text-subtitle);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
