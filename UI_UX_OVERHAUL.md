@@ -9,6 +9,7 @@ This document proposes a complete visual and experiential transformation of Jell
 ## Current State Analysis
 
 ### What Works ✅
+
 - Solid data fetching infrastructure (React Query)
 - Good component structure foundation
 - Basic page flow with navigation
@@ -16,16 +17,16 @@ This document proposes a complete visual and experiential transformation of Jell
 
 ### What Needs Work ❌
 
-| Issue | Current State | Problem |
-|-------|---------------|---------|
-| **Visual Identity** | Generic purple + yellow gradient | Looks like default Bootstrap/template |
-| **Typography** | System fonts, uniform sizing | Forgettable, no personality |
-| **Animations** | Basic fade/slide | No wow factor, no storytelling |
-| **Page Layout** | Traditional app layout with nav | Doesn't feel like a "reveal" experience |
-| **Data Presentation** | Dense grids, lists | Information overload, not celebratory |
-| **User Journey** | Linear nav with prev/next | No sense of progression or anticipation |
-| **Mobile Experience** | Responsive but basic | Not optimized for the primary use case |
-| **Shareability** | None | Missing viral potential |
+| Issue                 | Current State                    | Problem                                 |
+| --------------------- | -------------------------------- | --------------------------------------- |
+| **Visual Identity**   | Generic purple + yellow gradient | Looks like default Bootstrap/template   |
+| **Typography**        | System fonts, uniform sizing     | Forgettable, no personality             |
+| **Animations**        | Basic fade/slide                 | No wow factor, no storytelling          |
+| **Page Layout**       | Traditional app layout with nav  | Doesn't feel like a "reveal" experience |
+| **Data Presentation** | Dense grids, lists               | Information overload, not celebratory   |
+| **User Journey**      | Linear nav with prev/next        | No sense of progression or anticipation |
+| **Mobile Experience** | Responsive but basic             | Not optimized for the primary use case  |
+| **Shareability**      | None                             | Missing viral potential                 |
 
 ### Visual Audit - Current Aesthetic Problems
 
@@ -63,6 +64,7 @@ Transform Jellyfin Wrapped from a "data dashboard" into a **cinematic reveal exp
 ### Font Selection
 
 #### Primary: **Space Mono** + **Clash Display**
+
 - **Clash Display** (Headings): Bold, geometric display face with personality
 - **Space Mono** (Stats/Data): Technical feel for numbers, film credit aesthetic
 
@@ -76,12 +78,12 @@ Option C: Satoshi + Source Code Pro
 ### Type Scale
 
 ```css
---text-hero: clamp(4rem, 15vw, 12rem);     /* Big reveal numbers */
---text-title: clamp(2rem, 6vw, 4rem);      /* Page titles */
+--text-hero: clamp(4rem, 15vw, 12rem); /* Big reveal numbers */
+--text-title: clamp(2rem, 6vw, 4rem); /* Page titles */
 --text-subtitle: clamp(1.25rem, 3vw, 2rem); /* Supporting text */
---text-stat: clamp(3rem, 10vw, 8rem);      /* Statistics */
---text-body: clamp(1rem, 2vw, 1.25rem);    /* Body text */
---text-caption: 0.875rem;                   /* Small text */
+--text-stat: clamp(3rem, 10vw, 8rem); /* Statistics */
+--text-body: clamp(1rem, 2vw, 1.25rem); /* Body text */
+--text-caption: 0.875rem; /* Small text */
 ```
 
 ---
@@ -95,45 +97,56 @@ Abandon the generic purple gradient. Embrace a **dark, cinematic palette** with 
 ```css
 :root {
   /* Base - Deep, rich blacks and dark grays */
-  --bg-void: #0A0A0B;           /* Deepest black */
-  --bg-surface: #121214;         /* Card surfaces */
-  --bg-elevated: #1A1A1E;        /* Elevated elements */
-  --bg-overlay: rgba(0,0,0,0.8); /* Overlays */
+  --bg-void: #0a0a0b; /* Deepest black */
+  --bg-surface: #121214; /* Card surfaces */
+  --bg-elevated: #1a1a1e; /* Elevated elements */
+  --bg-overlay: rgba(0, 0, 0, 0.8); /* Overlays */
 
   /* Accent Lighting - Neon cinema vibes */
-  --accent-gold: #FFD93D;        /* Achievement gold */
-  --accent-coral: #FF6B6B;       /* Warm highlights */
-  --accent-cyan: #4ECDC4;        /* Cool data points */
-  --accent-magenta: #C44CFF;     /* Dramatic accent */
-  --accent-electric: #6C63FF;    /* Interactive elements */
-  
+  --accent-gold: #ffd93d; /* Achievement gold */
+  --accent-coral: #ff6b6b; /* Warm highlights */
+  --accent-cyan: #4ecdc4; /* Cool data points */
+  --accent-magenta: #c44cff; /* Dramatic accent */
+  --accent-electric: #6c63ff; /* Interactive elements */
+
   /* Gradients - For dramatic backgrounds */
-  --gradient-hero: linear-gradient(135deg, #0A0A0B 0%, #1A1A2E 50%, #16213E 100%);
-  --gradient-gold: linear-gradient(135deg, #FFD93D 0%, #FF6B6B 100%);
-  --gradient-aurora: linear-gradient(180deg, #0A0A0B 0%, #1A1A2E 30%, #2A1A4E 60%, #0A0A0B 100%);
-  
+  --gradient-hero: linear-gradient(
+    135deg,
+    #0a0a0b 0%,
+    #1a1a2e 50%,
+    #16213e 100%
+  );
+  --gradient-gold: linear-gradient(135deg, #ffd93d 0%, #ff6b6b 100%);
+  --gradient-aurora: linear-gradient(
+    180deg,
+    #0a0a0b 0%,
+    #1a1a2e 30%,
+    #2a1a4e 60%,
+    #0a0a0b 100%
+  );
+
   /* Text */
-  --text-primary: #FFFFFF;
-  --text-secondary: rgba(255,255,255,0.7);
-  --text-muted: rgba(255,255,255,0.4);
-  
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-muted: rgba(255, 255, 255, 0.4);
+
   /* Glow Effects */
-  --glow-gold: 0 0 60px rgba(255,217,61,0.4);
-  --glow-cyan: 0 0 60px rgba(78,205,196,0.4);
-  --glow-magenta: 0 0 60px rgba(196,76,255,0.4);
+  --glow-gold: 0 0 60px rgba(255, 217, 61, 0.4);
+  --glow-cyan: 0 0 60px rgba(78, 205, 196, 0.4);
+  --glow-magenta: 0 0 60px rgba(196, 76, 255, 0.4);
 }
 ```
 
 ### Per-Section Accent Colors
 
-| Section | Primary Accent | Secondary | Mood |
-|---------|---------------|-----------|------|
-| Top 10 | Gold | Warm White | Celebratory |
-| Movies | Coral/Red | Orange | Cinematic |
-| Shows | Cyan | Teal | Binge-worthy |
-| Audio | Magenta | Purple | Musical |
-| Stats | Electric Blue | Indigo | Analytical |
-| Finale | Gold Gradient | All colors | Grand finale |
+| Section | Primary Accent | Secondary  | Mood         |
+| ------- | -------------- | ---------- | ------------ |
+| Top 10  | Gold           | Warm White | Celebratory  |
+| Movies  | Coral/Red      | Orange     | Cinematic    |
+| Shows   | Cyan           | Teal       | Binge-worthy |
+| Audio   | Magenta        | Purple     | Musical      |
+| Stats   | Electric Blue  | Indigo     | Analytical   |
+| Finale  | Gold Gradient  | All colors | Grand finale |
 
 ---
 
@@ -221,6 +234,7 @@ Transform to: **Vertical story with chapters**
 ```
 
 **Animations**:
+
 - Spotlight sweeps across the screen
 - Text types in letter-by-letter like movie credits
 - Film grain overlay subtly animates
@@ -258,6 +272,7 @@ Transform to: **Vertical story with chapters**
 ```
 
 **Interactions**:
+
 - Number animates counting up from 0
 - Each comparison reveals sequentially
 - Confetti burst at reveal completion
@@ -295,6 +310,7 @@ Transform to: **Vertical story with chapters**
 ```
 
 **Features**:
+
 - Horizontal swipe through top 10
 - Each item has a unique quip/description
 - Poster reveals with spotlight effect
@@ -332,6 +348,7 @@ Transform to: **Vertical story with chapters**
 ```
 
 **Animation**:
+
 - Pie chart animates in segments
 - Tapping a segment expands it
 - Genre-specific color schemes and icons
@@ -423,7 +440,7 @@ const staggerConfig = {
     duration: 0.6,
     ease: [0.25, 0.46, 0.45, 0.94], // Custom easing
     staggerChildren: 0.15,
-  }
+  },
 };
 
 // Number counting animation
@@ -439,7 +456,7 @@ const confettiBurst = {
   particleCount: 100,
   spread: 70,
   origin: { y: 0.6 },
-  colors: ['#FFD93D', '#FF6B6B', '#4ECDC4'],
+  colors: ["#FFD93D", "#FF6B6B", "#4ECDC4"],
 };
 ```
 
@@ -450,26 +467,26 @@ Replace basic fade with cinematic transitions:
 ```typescript
 const pageTransitions = {
   filmWipe: {
-    initial: { clipPath: 'inset(0 100% 0 0)' },
-    animate: { clipPath: 'inset(0 0% 0 0)' },
-    exit: { clipPath: 'inset(0 0 0 100%)' },
+    initial: { clipPath: "inset(0 100% 0 0)" },
+    animate: { clipPath: "inset(0 0% 0 0)" },
+    exit: { clipPath: "inset(0 0 0 100%)" },
   },
-  
+
   spotlightReveal: {
-    initial: { 
-      clipPath: 'circle(0% at 50% 50%)',
-      filter: 'brightness(0)',
+    initial: {
+      clipPath: "circle(0% at 50% 50%)",
+      filter: "brightness(0)",
     },
-    animate: { 
-      clipPath: 'circle(150% at 50% 50%)',
-      filter: 'brightness(1)',
+    animate: {
+      clipPath: "circle(150% at 50% 50%)",
+      filter: "brightness(1)",
     },
   },
-  
+
   verticalSlide: {
-    initial: { y: '100%', opacity: 0 },
+    initial: { y: "100%", opacity: 0 },
     animate: { y: 0, opacity: 1 },
-    exit: { y: '-100%', opacity: 0 },
+    exit: { y: "-100%", opacity: 0 },
   },
 };
 ```
@@ -483,29 +500,47 @@ const pageTransitions = {
 Instead of flat colors, use dynamic, atmospheric backgrounds:
 
 #### 1. Aurora Effect (CSS-only)
+
 ```css
 .aurora-bg {
-  background: 
-    radial-gradient(ellipse at 20% 50%, rgba(196,76,255,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(78,205,196,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 60% 80%, rgba(255,217,61,0.1) 0%, transparent 50%),
+  background: radial-gradient(
+      ellipse at 20% 50%,
+      rgba(196, 76, 255, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 80% 20%,
+      rgba(78, 205, 196, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 60% 80%,
+      rgba(255, 217, 61, 0.1) 0%,
+      transparent 50%
+    ),
     var(--bg-void);
   animation: aurora 15s ease-in-out infinite alternate;
 }
 
 @keyframes aurora {
-  0%, 100% { filter: hue-rotate(0deg); }
-  50% { filter: hue-rotate(30deg); }
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
 }
 ```
 
 #### 2. Grain Overlay
+
 ```css
 .grain-overlay::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
-  background-image: url('data:image/svg+xml,...'); /* Noise texture */
+  background-image: url("data:image/svg+xml,..."); /* Noise texture */
   opacity: 0.05;
   pointer-events: none;
   mix-blend-mode: overlay;
@@ -513,15 +548,16 @@ Instead of flat colors, use dynamic, atmospheric backgrounds:
 ```
 
 #### 3. Floating Particles
+
 ```typescript
 // Use tsparticles or custom canvas for floating embers/stars
 const particleConfig = {
   particles: {
     number: { value: 50 },
     size: { value: 2, random: true },
-    move: { speed: 0.3, direction: 'top' },
+    move: { speed: 0.3, direction: "top" },
     opacity: { value: 0.5, random: true },
-  }
+  },
 };
 ```
 
@@ -531,13 +567,13 @@ const particleConfig = {
 
 ### Touch Gestures
 
-| Gesture | Action |
-|---------|--------|
-| Swipe Up | Next slide |
-| Swipe Down | Previous slide |
-| Tap | Reveal additional info |
-| Long Press | Share options |
-| Pinch | Zoom poster images |
+| Gesture    | Action                 |
+| ---------- | ---------------------- |
+| Swipe Up   | Next slide             |
+| Swipe Down | Previous slide         |
+| Tap        | Reveal additional info |
+| Long Press | Share options          |
+| Pinch      | Zoom poster images     |
 
 ### Mobile-Specific Layouts
 
@@ -571,20 +607,20 @@ const particleConfig = {
 
 Add subtle audio feedback for key moments:
 
-| Event | Sound |
-|-------|-------|
-| Page transition | Soft whoosh |
-| Number reveal | Counting tick |
-| Achievement unlock | Chime |
-| Confetti | Pop |
-| Share | Camera shutter |
+| Event              | Sound          |
+| ------------------ | -------------- |
+| Page transition    | Soft whoosh    |
+| Number reveal      | Counting tick  |
+| Achievement unlock | Chime          |
+| Confetti           | Pop            |
+| Share              | Camera shutter |
 
 ```typescript
 // Optional: Use Howler.js or native Web Audio API
 const sounds = {
-  whoosh: new Howl({ src: ['whoosh.mp3'], volume: 0.3 }),
-  tick: new Howl({ src: ['tick.mp3'], volume: 0.2 }),
-  confetti: new Howl({ src: ['pop.mp3'], volume: 0.4 }),
+  whoosh: new Howl({ src: ["whoosh.mp3"], volume: 0.3 }),
+  tick: new Howl({ src: ["tick.mp3"], volume: 0.2 }),
+  confetti: new Howl({ src: ["pop.mp3"], volume: 0.4 }),
 };
 ```
 
@@ -593,6 +629,7 @@ const sounds = {
 ## Implementation Roadmap
 
 ### Phase 1: Foundation (Week 1-2)
+
 - [ ] Set up new color system and CSS variables
 - [ ] Import and configure typography (Clash Display + Space Mono)
 - [ ] Create base `<StorySlide>` component
@@ -600,18 +637,21 @@ const sounds = {
 - [ ] Build grain/aurora background effects
 
 ### Phase 2: Core Slides (Week 3-4)
+
 - [ ] Intro/Splash page redesign
 - [ ] Big Number reveal page
 - [ ] Top 10 horizontal swipe carousel
 - [ ] Genre breakdown with animated chart
 
 ### Phase 3: Enhanced Visuals (Week 5-6)
+
 - [ ] Viewing habits heatmap
 - [ ] Monthly journey timeline
 - [ ] Fun facts with comparisons
 - [ ] Shareable card generator
 
 ### Phase 4: Polish (Week 7-8)
+
 - [ ] Micro-interactions and hover states
 - [ ] Mobile gesture optimization
 - [ ] Performance optimization
@@ -641,8 +681,11 @@ const sounds = {
 
 ```html
 <!-- In index.html -->
-<link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=space-mono@400,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com" />
+<link
+  href="https://api.fontshare.com/v2/css?f[]=clash-display@700,600,500&f[]=space-mono@400,700&display=swap"
+  rel="stylesheet"
+/>
 ```
 
 ### CSS Custom Properties Structure
@@ -651,19 +694,19 @@ const sounds = {
 /* src/styles/tokens.css */
 :root {
   /* Colors */
-  --color-bg-void: #0A0A0B;
+  --color-bg-void: #0a0a0b;
   /* ... all color tokens */
-  
+
   /* Typography */
-  --font-display: 'Clash Display', sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --font-display: "Clash Display", sans-serif;
+  --font-mono: "Space Mono", monospace;
   /* ... all type tokens */
-  
+
   /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   /* ... all spacing tokens */
-  
+
   /* Animation */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
@@ -676,6 +719,7 @@ const sounds = {
 ## Comparison: Before & After
 
 ### Before (Current)
+
 - 🟡 Generic purple/yellow gradient
 - 🟡 System fonts
 - 🟡 Basic fade animations
@@ -684,6 +728,7 @@ const sounds = {
 - 🟡 17 separate pages
 
 ### After (Proposed)
+
 - 🟢 Cinematic dark theme with neon accents
 - 🟢 Custom display typography
 - 🟢 Choreographed reveal animations
@@ -695,13 +740,13 @@ const sounds = {
 
 ## Success Metrics
 
-| Metric | Target |
-|--------|--------|
-| Time to complete | < 3 minutes |
-| Screenshot/share rate | > 30% of users |
-| Return visits | > 40% come back |
-| Mobile completion | > 80% |
-| "Wow" moments per session | 3-5 |
+| Metric                    | Target          |
+| ------------------------- | --------------- |
+| Time to complete          | < 3 minutes     |
+| Screenshot/share rate     | > 30% of users  |
+| Return visits             | > 40% come back |
+| Mobile completion         | > 80%           |
+| "Wow" moments per session | 3-5             |
 
 ---
 
@@ -739,9 +784,9 @@ interface StorySlideProps {
   /** Chapter number (1-9) for progress indicator */
   chapterNumber: number;
   /** Background variant */
-  background?: 'void' | 'aurora' | 'gradient-gold' | 'gradient-hero';
+  background?: "void" | "aurora" | "gradient-gold" | "gradient-hero";
   /** Accent color for this slide */
-  accentColor?: 'gold' | 'coral' | 'cyan' | 'magenta' | 'electric';
+  accentColor?: "gold" | "coral" | "cyan" | "magenta" | "electric";
   /** Whether to show progress dots */
   showProgress?: boolean;
   /** Whether to show swipe hint */
@@ -768,7 +813,7 @@ interface AnimatedNumberProps {
   /** Delay before starting */
   delay?: number;
   /** Size variant */
-  size?: 'stat' | 'hero'; // hero = massive reveal number
+  size?: "stat" | "hero"; // hero = massive reveal number
   /** Unit label (e.g., "HOURS", "MOVIES") */
   unit?: string;
   /** Trigger confetti on complete */
@@ -804,7 +849,7 @@ interface TopTenItem {
   posterUrl: string;
   stats: string; // e.g., "62 episodes • 187 hours"
   quip: string; // e.g., "You couldn't look away"
-  type: 'movie' | 'show';
+  type: "movie" | "show";
 }
 
 interface TopTenCarouselProps {
@@ -876,20 +921,21 @@ function shareToClipboard(cardRef: RefObject<HTMLDivElement>): Promise<void>;
 
 ### Current → New Structure
 
-| Current Page(s) | New Chapter | Data Source | Notes |
-|----------------|-------------|-------------|-------|
-| `SplashPage` | **1. INTRO** | None | Redesign splash |
-| `LoadingDataPage` | **1. INTRO** (loading state) | API calls | Show during data fetch |
-| *(new)* | **2. BIG NUMBER** | `useTopTen` total time | New page |
-| `TopTenPage` | **3. TOP 10** | `useTopTen` | Redesign as carousel |
-| `GenreReviewPage` | **4. YOUR GENRES** | `useMovies`, `useShows` | Redesign chart |
-| `PunchCardPage` + `MinutesPlayedPerDayPage` + `DeviceStatsPage` | **5. VIEWING HABITS** | `usePunchCard`, `useMinutesPlayedPerDay`, `useDeviceStats` | Combine into tabs/sections |
-| `OldestMoviePage` + `OldestShowPage` + `CriticallyAcclaimedPage` | **6. DEEP CUTS** | `useMovies`, `useShows` | Combine |
-| `ShowOfTheMonthPage` + `ActivityCalendarPage` | **7. THE JOURNEY** | `useMonthlyShowStats`, `useCalendar` | Combine as timeline |
-| *(new)* | **8. FUN FACTS** | Derived from all data | New page with comparisons |
-| *(new)* | **9. THE FINALE** | Summary of all data | New shareable card page |
+| Current Page(s)                                                  | New Chapter                  | Data Source                                                | Notes                      |
+| ---------------------------------------------------------------- | ---------------------------- | ---------------------------------------------------------- | -------------------------- |
+| `SplashPage`                                                     | **1. INTRO**                 | None                                                       | Redesign splash            |
+| `LoadingDataPage`                                                | **1. INTRO** (loading state) | API calls                                                  | Show during data fetch     |
+| _(new)_                                                          | **2. BIG NUMBER**            | `useTopTen` total time                                     | New page                   |
+| `TopTenPage`                                                     | **3. TOP 10**                | `useTopTen`                                                | Redesign as carousel       |
+| `GenreReviewPage`                                                | **4. YOUR GENRES**           | `useMovies`, `useShows`                                    | Redesign chart             |
+| `PunchCardPage` + `MinutesPlayedPerDayPage` + `DeviceStatsPage`  | **5. VIEWING HABITS**        | `usePunchCard`, `useMinutesPlayedPerDay`, `useDeviceStats` | Combine into tabs/sections |
+| `OldestMoviePage` + `OldestShowPage` + `CriticallyAcclaimedPage` | **6. DEEP CUTS**             | `useMovies`, `useShows`                                    | Combine                    |
+| `ShowOfTheMonthPage` + `ActivityCalendarPage`                    | **7. THE JOURNEY**           | `useMonthlyShowStats`, `useCalendar`                       | Combine as timeline        |
+| _(new)_                                                          | **8. FUN FACTS**             | Derived from all data                                      | New page with comparisons  |
+| _(new)_                                                          | **9. THE FINALE**            | Summary of all data                                        | New shareable card page    |
 
 ### Pages to REMOVE
+
 - `HolidayReviewPage` - User explicitly said "ridiculous"
 - `MoviesReviewPage` - Condensed into Top 10
 - `ShowReviewPage` - Condensed into Top 10
@@ -900,6 +946,7 @@ function shareToClipboard(cardRef: RefObject<HTMLDivElement>): Promise<void>;
 - `UnfinishedShowsPage` - Could add to Fun Facts as "cliff-hangers"
 
 ### Pages to KEEP (modified)
+
 - `ServerConfigurationPage` - Still needed for setup, but could be styled to match
 
 ---
@@ -907,17 +954,19 @@ function shareToClipboard(cardRef: RefObject<HTMLDivElement>): Promise<void>;
 ## Appendix C: Data Requirements Per Chapter
 
 ### Chapter 1: INTRO
+
 ```typescript
 // No data required - static content
 // Show loading state while fetching data for other chapters
 ```
 
 ### Chapter 2: BIG NUMBER
+
 ```typescript
 interface BigNumberData {
   totalMinutes: number;
   // Derived comparisons:
-  equivalentDays: number;        // totalMinutes / 1440
+  equivalentDays: number; // totalMinutes / 1440
   equivalentAllNighters: number; // totalMinutes / 480 (8hr nights)
   // Fun comparisons calculated client-side
 }
@@ -926,6 +975,7 @@ interface BigNumberData {
 ```
 
 ### Chapter 3: TOP 10
+
 ```typescript
 interface TopTenData {
   movies: Array<{
@@ -949,6 +999,7 @@ interface TopTenData {
 ```
 
 ### Chapter 4: YOUR GENRES
+
 ```typescript
 interface GenreData {
   genres: Array<{
@@ -968,13 +1019,14 @@ interface GenreData {
 ```
 
 ### Chapter 5: VIEWING HABITS
+
 ```typescript
 interface ViewingHabitsData {
   heatmap: Array<{ day: number; hour: number; count: number }>;
   peakDay: string; // e.g., "Friday"
   peakHour: string; // e.g., "10:47 PM"
   nightOwlPercentage: number; // % after 9 PM
-  personality: 'NIGHT_OWL' | 'EARLY_BIRD' | 'WEEKEND_WARRIOR' | 'BINGE_MASTER';
+  personality: "NIGHT_OWL" | "EARLY_BIRD" | "WEEKEND_WARRIOR" | "BINGE_MASTER";
   devices: Array<{ name: string; percentage: number }>;
 }
 
@@ -982,6 +1034,7 @@ interface ViewingHabitsData {
 ```
 
 ### Chapter 6: DEEP CUTS
+
 ```typescript
 interface DeepCutsData {
   oldestMovie?: { name: string; year: number; posterUrl: string };
@@ -994,6 +1047,7 @@ interface DeepCutsData {
 ```
 
 ### Chapter 7: THE JOURNEY
+
 ```typescript
 interface JourneyData {
   monthlyStats: Array<{
@@ -1010,6 +1064,7 @@ interface JourneyData {
 ```
 
 ### Chapter 8: FUN FACTS
+
 ```typescript
 interface FunFactsData {
   facts: Array<{
@@ -1030,6 +1085,7 @@ interface FunFactsData {
 ```
 
 ### Chapter 9: THE FINALE
+
 ```typescript
 interface FinaleData {
   summary: {
@@ -1082,14 +1138,13 @@ const quipTemplates = {
     "Like visiting an old friend",
   ],
   // Generic fallbacks
-  generic: [
-    "A worthy investment",
-    "Time well spent",
-    "No regrets here",
-  ],
+  generic: ["A worthy investment", "Time well spent", "No regrets here"],
 };
 
-function generateQuip(item: TopTenItem, viewingPattern: ViewingPattern): string {
+function generateQuip(
+  item: TopTenItem,
+  viewingPattern: ViewingPattern
+): string {
   // Logic to select appropriate quip based on:
   // - Rank (1st place gets special treatment)
   // - Watch speed (binged vs savored)
@@ -1102,19 +1157,19 @@ function generateQuip(item: TopTenItem, viewingPattern: ViewingPattern): string 
 
 ```typescript
 const genrePersonalities: Record<string, string[]> = {
-  'Sci-Fi': ['SCI-FI OBSESSED', 'SPACE CADET', 'FUTURE DWELLER'],
-  'Drama': ['DRAMA ADDICT', 'EMOTIONAL EXPLORER', 'FEELS SEEKER'],
-  'Comedy': ['LAUGH HUNTER', 'JOY SEEKER', 'COMEDY CONNOISSEUR'],
-  'Action': ['ADRENALINE JUNKIE', 'THRILL SEEKER', 'ACTION HERO'],
-  'Horror': ['FEAR ENTHUSIAST', 'NIGHTMARE COLLECTOR', 'SCARE SEEKER'],
-  'Documentary': ['TRUTH SEEKER', 'KNOWLEDGE HUNTER', 'REALITY CHECKER'],
-  'Animation': ['ANIMATION AFICIONADO', 'TOON LOVER', 'ANIMATED SOUL'],
-  'Romance': ['HOPELESS ROMANTIC', 'LOVE STORY LOVER', 'HEART COLLECTOR'],
+  "Sci-Fi": ["SCI-FI OBSESSED", "SPACE CADET", "FUTURE DWELLER"],
+  Drama: ["DRAMA ADDICT", "EMOTIONAL EXPLORER", "FEELS SEEKER"],
+  Comedy: ["LAUGH HUNTER", "JOY SEEKER", "COMEDY CONNOISSEUR"],
+  Action: ["ADRENALINE JUNKIE", "THRILL SEEKER", "ACTION HERO"],
+  Horror: ["FEAR ENTHUSIAST", "NIGHTMARE COLLECTOR", "SCARE SEEKER"],
+  Documentary: ["TRUTH SEEKER", "KNOWLEDGE HUNTER", "REALITY CHECKER"],
+  Animation: ["ANIMATION AFICIONADO", "TOON LOVER", "ANIMATED SOUL"],
+  Romance: ["HOPELESS ROMANTIC", "LOVE STORY LOVER", "HEART COLLECTOR"],
   // ... etc
 };
 
 function getPersonalityLabel(topGenre: string): string {
-  const options = genrePersonalities[topGenre] || ['ECLECTIC VIEWER'];
+  const options = genrePersonalities[topGenre] || ["ECLECTIC VIEWER"];
   return options[Math.floor(Math.random() * options.length)];
 }
 ```
@@ -1122,30 +1177,32 @@ function getPersonalityLabel(topGenre: string): string {
 ### Viewing Personality Types
 
 ```typescript
-function calculateViewingPersonality(data: ViewingHabitsData): ViewingPersonality {
+function calculateViewingPersonality(
+  data: ViewingHabitsData
+): ViewingPersonality {
   const { nightOwlPercentage, peakDay, heatmap } = data;
-  
+
   // Night Owl: >60% viewing after 9 PM
   if (nightOwlPercentage > 60) {
-    return { type: 'NIGHT_OWL', emoji: '🦉', label: 'Night Owl' };
+    return { type: "NIGHT_OWL", emoji: "🦉", label: "Night Owl" };
   }
-  
+
   // Early Bird: >40% viewing before noon
   const morningPercentage = calculateMorningViewing(heatmap);
   if (morningPercentage > 40) {
-    return { type: 'EARLY_BIRD', emoji: '🐦', label: 'Early Bird' };
+    return { type: "EARLY_BIRD", emoji: "🐦", label: "Early Bird" };
   }
-  
+
   // Weekend Warrior: >70% viewing on Sat/Sun
   const weekendPercentage = calculateWeekendViewing(heatmap);
   if (weekendPercentage > 70) {
-    return { type: 'WEEKEND_WARRIOR', emoji: '⚔️', label: 'Weekend Warrior' };
+    return { type: "WEEKEND_WARRIOR", emoji: "⚔️", label: "Weekend Warrior" };
   }
-  
+
   // Binge Master: Has viewing sessions >4 hours
   // (would need session data)
-  
-  return { type: 'BALANCED', emoji: '⚖️', label: 'Balanced Viewer' };
+
+  return { type: "BALANCED", emoji: "⚖️", label: "Balanced Viewer" };
 }
 ```
 
@@ -1156,13 +1213,25 @@ const comparisons = {
   time: [
     { threshold: 24, template: "That's {x} full days of entertainment" },
     { threshold: 168, template: "A whole week of your life, well spent" },
-    { threshold: 720, template: "You could've flown to the moon and back... twice" },
+    {
+      threshold: 720,
+      template: "You could've flown to the moon and back... twice",
+    },
     { threshold: 2000, template: "Roughly {x} flights from NYC to LA" },
   ],
   movies: [
-    { threshold: 10, template: "More movies than your local theater shows in a month" },
-    { threshold: 50, template: "You've seen more movies than most film critics" },
-    { threshold: 100, template: "You're basically running your own film festival" },
+    {
+      threshold: 10,
+      template: "More movies than your local theater shows in a month",
+    },
+    {
+      threshold: 50,
+      template: "You've seen more movies than most film critics",
+    },
+    {
+      threshold: 100,
+      template: "You're basically running your own film festival",
+    },
   ],
   episodes: [
     { threshold: 100, template: "Enough episodes to fill a small TV network" },
@@ -1250,7 +1319,9 @@ src/
 
 ```typescript
 // Respect prefers-reduced-motion
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia(
+  "(prefers-reduced-motion: reduce)"
+).matches;
 
 const animationConfig = prefersReducedMotion
   ? { duration: 0, staggerChildren: 0 }
@@ -1275,13 +1346,13 @@ const animationConfig = prefersReducedMotion
 
 ### Keyboard Navigation
 
-| Key | Action |
-|-----|--------|
-| `ArrowDown` / `Space` | Next chapter |
-| `ArrowUp` | Previous chapter |
-| `Home` | First chapter |
-| `End` | Last chapter |
-| `Escape` | Exit story mode |
+| Key                   | Action           |
+| --------------------- | ---------------- |
+| `ArrowDown` / `Space` | Next chapter     |
+| `ArrowUp`             | Previous chapter |
+| `Home`                | First chapter    |
+| `End`                 | Last chapter     |
+| `Escape`              | Exit story mode  |
 
 ---
 
@@ -1289,28 +1360,36 @@ const animationConfig = prefersReducedMotion
 
 ```css
 /* Mobile First */
---bp-sm: 640px;   /* Small tablets */
---bp-md: 768px;   /* Tablets */
---bp-lg: 1024px;  /* Laptops */
---bp-xl: 1280px;  /* Desktops */
+--bp-sm: 640px; /* Small tablets */
+--bp-md: 768px; /* Tablets */
+--bp-lg: 1024px; /* Laptops */
+--bp-xl: 1280px; /* Desktops */
 
 /* Usage */
-@media (min-width: 640px) { /* sm */ }
-@media (min-width: 768px) { /* md */ }
-@media (min-width: 1024px) { /* lg */ }
-@media (min-width: 1280px) { /* xl */ }
+@media (min-width: 640px) {
+  /* sm */
+}
+@media (min-width: 768px) {
+  /* md */
+}
+@media (min-width: 1024px) {
+  /* lg */
+}
+@media (min-width: 1280px) {
+  /* xl */
+}
 ```
 
 ### Mobile vs Desktop Differences
 
-| Element | Mobile | Desktop |
-|---------|--------|---------|
-| Navigation | Swipe gestures | Arrow keys + scroll |
-| Top 10 | Horizontal swipe | Horizontal swipe or grid |
-| Charts | Simplified, larger touch targets | Full detail |
-| Share card | Full-width | Centered, fixed size |
-| Progress | Bottom dots | Side dots or top bar |
-| Typography | Larger relative sizes | Standard sizes |
+| Element    | Mobile                           | Desktop                  |
+| ---------- | -------------------------------- | ------------------------ |
+| Navigation | Swipe gestures                   | Arrow keys + scroll      |
+| Top 10     | Horizontal swipe                 | Horizontal swipe or grid |
+| Charts     | Simplified, larger touch targets | Full detail              |
+| Share card | Full-width                       | Centered, fixed size     |
+| Progress   | Bottom dots                      | Side dots or top bar     |
+| Typography | Larger relative sizes            | Standard sizes           |
 
 ---
 
@@ -1359,7 +1438,7 @@ Each chapter should gracefully handle missing data:
 
 ```typescript
 // If no movies data
-<GenresChapter 
+<GenresChapter
   fallback={<Text>Not enough viewing data to show genres</Text>}
 />
 
@@ -1382,7 +1461,7 @@ const chapters = allChapters.filter(c => c.hasData);
   --duration-slow: 600ms;
   --duration-reveal: 800ms;
   --duration-dramatic: 1200ms;
-  
+
   /* Easings */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1393,28 +1472,929 @@ const chapters = allChapters.filter(c => c.hasData);
 
 ### Per-Component Timing
 
-| Component | Enter Duration | Exit Duration | Easing |
-|-----------|----------------|---------------|--------|
-| StorySlide | 600ms | 400ms | ease-out-expo |
-| AnimatedNumber | 2500ms | N/A | ease-out |
-| ComparisonItem | 400ms each | 200ms | ease-out-back |
-| TopTenCard | 500ms | 300ms | ease-spring |
-| GenrePieSegment | 800ms | 400ms | ease-out-expo |
-| Confetti | 3000ms | 1000ms | linear |
-| ProgressDot | 200ms | 200ms | ease-out |
+| Component       | Enter Duration | Exit Duration | Easing        |
+| --------------- | -------------- | ------------- | ------------- |
+| StorySlide      | 600ms          | 400ms         | ease-out-expo |
+| AnimatedNumber  | 2500ms         | N/A           | ease-out      |
+| ComparisonItem  | 400ms each     | 200ms         | ease-out-back |
+| TopTenCard      | 500ms          | 300ms         | ease-spring   |
+| GenrePieSegment | 800ms          | 400ms         | ease-out-expo |
+| Confetti        | 3000ms         | 1000ms        | linear        |
+| ProgressDot     | 200ms          | 200ms         | ease-out      |
 
 ### Stagger Delays
 
-| Animation | Stagger Delay |
-|-----------|---------------|
-| Comparison items | 300ms |
-| Top 10 rank badges | 150ms |
-| Genre segments | 100ms |
-| Fun facts | 400ms |
-| Letter-by-letter text | 50ms |
+| Animation             | Stagger Delay |
+| --------------------- | ------------- |
+| Comparison items      | 300ms         |
+| Top 10 rank badges    | 150ms         |
+| Genre segments        | 100ms         |
+| Fun facts             | 400ms         |
+| Letter-by-letter text | 50ms          |
 
 ---
 
-*"Your year. Your story. Your premiere."*
+## Appendix J: Implementation Decisions & Clarifications
+
+This appendix provides definitive answers to implementation questions, ensuring no ambiguity during development.
+
+### J.1 User Flow & Navigation
+
+#### J.1.1 Complete User Journey
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        USER FLOW DIAGRAM                            │
+├─────────────────────────────────────────────────────────────────────┤
+│                                                                     │
+│   FIRST-TIME USER:                                                  │
+│   ┌──────────┐    ┌─────────────┐    ┌─────────────┐    ┌───────┐  │
+│   │    /     │───▶│  /configure │───▶│   /story    │───▶│ Done  │  │
+│   │ (Splash) │    │   (Login)   │    │ (Chapters)  │    │       │  │
+│   └──────────┘    └─────────────┘    └─────────────┘    └───────┘  │
+│                                                                     │
+│   RETURNING USER (with saved credentials):                          │
+│   ┌──────────┐    ┌─────────────┐    ┌───────┐                     │
+│   │    /     │───▶│   /story    │───▶│ Done  │                     │
+│   │ (Splash) │    │ (Chapters)  │    │       │                     │
+│   └──────────┘    └─────────────┘    └───────┘                     │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+**Decisions:**
+
+- `SplashPage` (`/`) remains as a **separate landing page** with the "REVEAL YOUR YEAR" button
+- After successful login in `ServerConfigurationPage`, redirect to `/story` (NOT `/loading`)
+- The old `/loading` → `/movies` flow is **completely replaced** by `/story`
+- Old routes (`/movies`, `/shows`, etc.) should **redirect to `/story`** with a URL parameter indicating chapter
+
+#### J.1.2 Route Structure
+
+```typescript
+const routes = [
+  { path: '/', element: <SplashPage /> },
+  { path: '/configure', element: <ServerConfigurationPage /> },
+  { path: '/story', element: <StoryContainer /> },
+  { path: '/story/:chapterId', element: <StoryContainer /> }, // Deep link to specific chapter
+
+  // Legacy redirects
+  { path: '/movies', element: <Navigate to="/story/top-ten" /> },
+  { path: '/shows', element: <Navigate to="/story/top-ten" /> },
+  { path: '/TopTen', element: <Navigate to="/story/top-ten" /> },
+  { path: '/genres', element: <Navigate to="/story/genres" /> },
+  { path: '/loading', element: <Navigate to="/story" /> },
+  // ... etc for all old routes
+];
+```
+
+#### J.1.3 IntroChapter Loading Behavior
+
+**Decisions:**
+
+- `IntroChapter` shows a **cinematic film countdown** loading state while `useChapterData` fetches
+- The "REVEAL YOUR YEAR" button is **disabled** until all critical data is loaded
+- Use the film countdown design (3... 2... 1...) from Appendix H
+- If loading fails, show an **in-chapter error state** with "Take 2" retry button
+- Do NOT redirect elsewhere on error - keep the user in the story experience
+
+```typescript
+// IntroChapter behavior
+function IntroChapter() {
+  const { isLoading, error, data } = useChapterData();
+
+  if (isLoading) {
+    return <FilmCountdownLoader />;
+  }
+
+  if (error) {
+    return <ErrorSlide error={error} retry={refetch} />;
+  }
+
+  return (
+    <StorySlide>
+      {/* Intro content */}
+      <Button disabled={!data} onClick={startStory}>
+        REVEAL YOUR YEAR
+      </Button>
+    </StorySlide>
+  );
+}
+```
+
+#### J.1.4 ServerConfigurationPage Integration
+
+**Decisions:**
+
+- **YES**, style `ServerConfigurationPage` with the Midnight Premiere design system
+- After successful authentication, redirect to `/story`
+- Keep accessible via a "⚙️" settings icon in story mode (top-right corner)
+- Also accessible from SplashPage if credentials need reconfiguration
+
+---
+
+### J.2 Chapter Behavior & Data Handling
+
+#### J.2.1 Chapter Skipping Logic
+
+**Decisions:**
+
+- Chapters are **automatically skipped** if they have no data
+- Progress indicator shows **only active chapters** (fewer dots if chapters skipped)
+- Users **cannot manually skip** - navigation is automatic based on swipe/click
+- Skipped chapters are logged to console for debugging but invisible to users
+
+```typescript
+// Chapter filtering logic
+const activeChapters = allChapters.filter((chapter) => {
+  switch (chapter.id) {
+    case "intro":
+    case "finale":
+      return true; // Always show
+    case "big-number":
+      return data.totalMinutes > 0;
+    case "top-ten":
+      return data.movies.length > 0 || data.shows.length > 0;
+    case "genres":
+      return data.genres.length > 0;
+    case "habits":
+      return data.heatmap.length > 0;
+    case "deep-cuts":
+      return (
+        data.oldestMovie ||
+        data.oldestShow ||
+        data.criticallyAcclaimed.length > 0
+      );
+    case "journey":
+      return data.monthlyStats.length > 0;
+    case "fun-facts":
+      return data.facts.length >= 2; // Need at least 2 fun facts
+    default:
+      return true;
+  }
+});
+```
+
+#### J.2.2 Empty State Handling
+
+**Decisions:**
+
+- Empty chapters are **completely hidden** (not shown with a message)
+- If ALL chapters would be empty (no viewing data), show a special "Get Started" chapter:
+
+```typescript
+// No data scenario
+if (data.totalMinutes === 0) {
+  return (
+    <StorySlide>
+      <Title>Your Story Awaits</Title>
+      <Text>
+        We don't have enough viewing data yet.
+        Start watching and come back later!
+      </Text>
+      <Button onClick={() => navigate('/')}>
+        Return Home
+      </Button>
+    </StorySlide>
+  );
+}
+```
+
+#### J.2.3 Error State Behavior
+
+**Decisions:**
+
+- If a **single chapter** fails to load, **skip it** and continue to the next chapter
+- Show a toast notification: "Some data couldn't be loaded"
+- If **all data** fails to load, show error state in IntroChapter with retry
+- Errors are **chapter-specific** - they don't break the entire story
+
+```typescript
+// Per-chapter error handling
+const chapterData = useChapterData(chapterId);
+
+if (chapterData.error && !chapterData.data) {
+  // Skip this chapter, proceed to next
+  return <Navigate to={`/story/${nextChapterId}`} />;
+}
+```
+
+---
+
+### J.3 Timeframe Selection
+
+#### J.3.1 Timeframe Selector Placement
+
+**Decisions:**
+
+- Timeframe selection happens **on SplashPage** (before entering story mode)
+- **NOT** accessible during story mode (no settings icon for this)
+- Changing timeframe requires **returning to SplashPage**
+- Story mode is a linear, uninterrupted experience
+
+```
+┌─────────────────────────────────────────────┐
+│            JELLYFIN WRAPPED                 │
+│               2 0 2 5                       │
+│                                             │
+│   ┌─────────────────────────────────────┐   │
+│   │  VIEW STATS FOR:                    │   │
+│   │                                     │   │
+│   │  ○ This Year (2025)                 │   │
+│   │  ○ Last 12 Months                   │   │
+│   │  ○ All Time                         │   │
+│   │  ○ Custom Range...                  │   │
+│   │                                     │   │
+│   └─────────────────────────────────────┘   │
+│                                             │
+│       [ ▶ REVEAL YOUR YEAR ]                │
+│                                             │
+└─────────────────────────────────────────────┘
+```
+
+#### J.3.2 Timeframe Persistence
+
+**Decisions:**
+
+- Selected timeframe **persists in localStorage**
+- Also reflected in URL as query param: `/story?timeframe=2025`
+- Changing timeframe **invalidates React Query cache** for all data
+
+```typescript
+// Timeframe storage
+const TIMEFRAME_KEY = "jellyfin-wrapped-timeframe";
+
+function useTimeframe() {
+  const [timeframe, setTimeframe] = useState(() => {
+    const stored = localStorage.getItem(TIMEFRAME_KEY);
+    return stored
+      ? JSON.parse(stored)
+      : { type: "year", year: new Date().getFullYear() };
+  });
+
+  const updateTimeframe = (newTimeframe: TimeframeOption) => {
+    localStorage.setItem(TIMEFRAME_KEY, JSON.stringify(newTimeframe));
+    queryClient.invalidateQueries(); // Clear all cached data
+    setTimeframe(newTimeframe);
+  };
+
+  return { timeframe, updateTimeframe };
+}
+```
+
+---
+
+### J.4 Old Pages & Backward Compatibility
+
+#### J.4.1 Old Page Deprecation Strategy
+
+**Decisions:**
+
+- Old pages are **removed from routing** but **kept in codebase** (marked deprecated)
+- No "dashboard view" for power users - story mode is the only experience
+- Old routes **redirect to `/story`** with appropriate chapter
+
+```typescript
+// Deprecated pages - DO NOT USE
+// These files are kept for reference but not routed
+// Will be deleted in v2.1
+
+// Legacy route mapping
+const legacyRouteMap: Record<string, string> = {
+  "/movies": "/story/top-ten",
+  "/shows": "/story/top-ten",
+  "/TopTen": "/story/top-ten",
+  "/genres": "/story/genres",
+  "/actors": "/story/top-ten", // Actors merged into Top 10
+  "/punch-card": "/story/habits",
+  "/device-stats": "/story/habits",
+  "/oldest-movie": "/story/deep-cuts",
+  "/oldest-show": "/story/deep-cuts",
+  "/critically-acclaimed": "/story/deep-cuts",
+  "/show-of-month": "/story/journey",
+  "/calendar": "/story/journey",
+  "/unfinished": "/story/fun-facts",
+  "/audio": "/story/fun-facts",
+  "/music-videos": "/story/fun-facts",
+  "/live-tv": "/story/fun-facts",
+  "/holidays": "/story", // Removed entirely
+  "/loading": "/story",
+};
+```
+
+#### J.4.2 Navigation Component
+
+**Decisions:**
+
+- Navigation hamburger menu is **completely removed** in story mode
+- Story mode has its own minimal UI: progress dots + exit button
+- Exit button (X in top-left) returns to SplashPage
+- No way to access old dashboard view - it doesn't exist anymore
+
+```typescript
+// Story mode header
+function StoryHeader() {
+  return (
+    <header className="story-header">
+      <button onClick={() => navigate('/')} aria-label="Exit story">
+        ✕
+      </button>
+      <StoryProgress current={currentChapter} total={totalChapters} />
+      <button onClick={() => navigate('/configure')} aria-label="Settings">
+        ⚙️
+      </button>
+    </header>
+  );
+}
+```
+
+---
+
+### J.5 Share Functionality
+
+#### J.5.1 Share Card Implementation
+
+**Decisions:**
+
+- Sharing is available **only at the Finale chapter** (Chapter 9)
+- Users can share **only the summary card**, not individual chapters
+- Supported sharing methods:
+  1. **Download as PNG** (primary)
+  2. **Copy to clipboard** (image)
+  3. **Native share** (if Web Share API available)
+- Share cards **include Jellyfin Wrapped branding** (not customizable)
+
+```typescript
+// Share functionality
+async function handleShare(method: "download" | "clipboard" | "native") {
+  const cardElement = cardRef.current;
+  if (!cardElement) return;
+
+  const dataUrl = await toPng(cardElement, {
+    pixelRatio: 2, // High resolution
+    backgroundColor: "#0A0A0B",
+  });
+
+  switch (method) {
+    case "download":
+      downloadImage(dataUrl, `jellyfin-wrapped-${year}.png`);
+      break;
+    case "clipboard":
+      await copyImageToClipboard(dataUrl);
+      toast.success("Copied to clipboard!");
+      break;
+    case "native":
+      if (navigator.share) {
+        await navigator.share({
+          title: `My Jellyfin Wrapped ${year}`,
+          files: [dataUrlToFile(dataUrl)],
+        });
+      }
+      break;
+  }
+}
+```
+
+#### J.5.2 Share Card Data
+
+**Decisions:**
+
+- Share card includes: total hours, top genre, #1 show, #1 movie, year
+- **No percentile** calculation (would require server-side aggregation)
+- If we add percentile later, it would be **server-specific** (not global)
+- Share cards are generated **client-side** using `html-to-image`
+
+```typescript
+interface ShareCardData {
+  totalHours: number;
+  topGenre: string;
+  topShow: string | null;
+  topMovie: string | null;
+  year: number;
+  // percentile: number; // Future: requires backend
+}
+```
+
+---
+
+### J.6 Animation & Interaction Details
+
+#### J.6.1 Animation Control
+
+**Decisions:**
+
+- Users **CAN tap/click to skip** counting animations (jumps to final value)
+- No "skip intro" option - intro is already minimal
+- **No auto-advance** - user must swipe/click to proceed
+- Animations play once per visit (not replayed when navigating back)
+
+```typescript
+// Skippable animation
+function AnimatedNumber({ value, onComplete }: Props) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  const skipAnimation = () => {
+    setDisplayValue(value);
+    setIsComplete(true);
+    onComplete?.();
+  };
+
+  return (
+    <div onClick={skipAnimation} role="button" tabIndex={0}>
+      <span>{formatNumber(displayValue)}</span>
+      {!isComplete && <span className="skip-hint">Tap to skip</span>}
+    </div>
+  );
+}
+```
+
+#### J.6.2 Swipe Gesture Configuration
+
+**Decisions:**
+
+- Minimum swipe distance: **50px** (standard)
+- Swipe velocity threshold: **0.3** (pixels/ms)
+- **NOT** adjustable by user
+- Horizontal swipes within carousels are detected by touch start position:
+  - Top 80% of screen = vertical chapter navigation
+  - Bottom 20% (carousel area) = horizontal carousel navigation
+
+```typescript
+// Gesture detection
+const swipeHandlers = useSwipeable({
+  onSwipedUp: () => goToNextChapter(),
+  onSwipedDown: () => goToPreviousChapter(),
+  delta: 50, // Minimum distance
+  velocity: 0.3, // Minimum velocity
+  preventScrollOnSwipe: true,
+});
+```
+
+#### J.6.3 Keyboard Navigation Escape Behavior
+
+**Decisions:**
+
+- `Escape` shows a **confirmation modal**: "Exit your Wrapped?"
+- Confirming exits to SplashPage (`/`)
+- Canceling returns to story
+- No direct navigation without confirmation
+
+```typescript
+// Escape key handling
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      setShowExitConfirm(true);
+    }
+  };
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
+
+// Exit confirmation modal
+<Modal open={showExitConfirm}>
+  <Title>Exit your Wrapped?</Title>
+  <Text>You can always come back and view it again.</Text>
+  <Button onClick={() => navigate('/')}>Exit</Button>
+  <Button variant="ghost" onClick={() => setShowExitConfirm(false)}>
+    Continue Watching
+  </Button>
+</Modal>
+```
+
+---
+
+### J.7 Data Requirements & Calculations
+
+#### J.7.1 Total Watch Time Calculation
+
+**Decisions:**
+
+- Total watch time includes: **Movies + Shows + Audio**
+- Does NOT include: Live TV (unreliable tracking), Music Videos (minor)
+- Calculated from **playback reporting plugin data** (actual watched time)
+- Partial watches are included (if you watched 50% of a movie, count that 50%)
+
+```typescript
+// Total time calculation
+function calculateTotalWatchTime(data: AllData): number {
+  const movieMinutes = data.movies.reduce(
+    (sum, m) => sum + m.playbackMinutes,
+    0
+  );
+  const showMinutes = data.shows.reduce((sum, s) => sum + s.playbackMinutes, 0);
+  const audioMinutes =
+    data.audio?.reduce((sum, a) => sum + a.playbackMinutes, 0) ?? 0;
+
+  return movieMinutes + showMinutes + audioMinutes;
+}
+```
+
+#### J.7.2 Percentile Calculation
+
+**Decisions:**
+
+- **SKIP percentile for v1** - not feasible without backend aggregation
+- Show a placeholder instead: "Your personal best!" or similar
+- Future enhancement: If backend added, calculate against same-server users only
+
+```typescript
+// v1: No percentile
+interface FinaleData {
+  // percentile?: number; // Not implemented in v1
+  personalBadge: string; // "Dedicated Viewer", "Binge Master", etc.
+}
+```
+
+#### J.7.3 Fun Facts Configuration
+
+**Decisions:**
+
+- Show **3-5 fun facts** per Fun Facts chapter (dynamically selected)
+- "Longest binge" = longest continuous viewing **session** (gap > 30 min = new session)
+- Fun facts use **predefined templates** filled with user data
+- Minimum 2 fun facts required to show chapter; otherwise skip
+
+```typescript
+// Fun fact generation
+const funFactGenerators = [
+  // Always try these first
+  (data) =>
+    data.totalHours > 100 && {
+      emoji: "🏆",
+      title: "Century Club",
+      value: `${data.totalHours}+ hours watched`,
+      comparison: "That's more than most people watch in a year!",
+    },
+
+  // Genre-specific
+  (data) =>
+    data.topGenre && {
+      emoji: genreEmojis[data.topGenre],
+      title: `${data.topGenre} Superfan`,
+      value: `${data.genreCounts[data.topGenre]} titles`,
+      comparison: genreComparisons[data.topGenre],
+    },
+
+  // Binge detection
+  (data) =>
+    data.longestBinge > 4 && {
+      emoji: "🍿",
+      title: "Marathon Runner",
+      value: `${data.longestBinge} hour binge`,
+      comparison: `On ${format(data.longestBingeDate, "MMMM d")}`,
+    },
+
+  // Unfinished shows
+  (data) =>
+    data.unfinishedShows.length > 0 && {
+      emoji: "📺",
+      title: "Cliffhanger Collector",
+      value: `${data.unfinishedShows.length} shows unfinished`,
+      comparison: "Time to tie up loose ends?",
+    },
+
+  // ... more generators
+];
+
+function generateFunFacts(data: AllData): FunFact[] {
+  return funFactGenerators
+    .map((gen) => gen(data))
+    .filter(Boolean)
+    .slice(0, 5); // Max 5 fun facts
+}
+```
+
+---
+
+### J.8 Visual Design Details
+
+#### J.8.1 Background Variants Per Chapter
+
+| Chapter       | Background      | Accent Color | Rationale             |
+| ------------- | --------------- | ------------ | --------------------- |
+| 1. Intro      | `void`          | Gold         | Clean, dramatic start |
+| 2. Big Number | `aurora`        | Gold         | Celebratory reveal    |
+| 3. Top 10     | `gradient-hero` | Gold         | Award show vibes      |
+| 4. Genres     | `aurora`        | Cyan         | Cool, analytical      |
+| 5. Habits     | `void`          | Electric     | Data-focused          |
+| 6. Deep Cuts  | `gradient-hero` | Coral        | Warm nostalgia        |
+| 7. Journey    | `aurora`        | Cyan         | Timeline flow         |
+| 8. Fun Facts  | `void`          | Magenta      | Playful energy        |
+| 9. Finale     | `gradient-gold` | Gold         | Grand finale          |
+
+**Decisions:**
+
+- Backgrounds are **chapter-specific** (not user-configurable)
+- Backgrounds **crossfade** between chapters (300ms transition)
+
+```typescript
+const chapterBackgrounds: Record<ChapterId, BackgroundVariant> = {
+  intro: "void",
+  "big-number": "aurora",
+  "top-ten": "gradient-hero",
+  genres: "aurora",
+  habits: "void",
+  "deep-cuts": "gradient-hero",
+  journey: "aurora",
+  "fun-facts": "void",
+  finale: "gradient-gold",
+};
+```
+
+#### J.8.2 Typography Responsiveness
+
+**Decisions:**
+
+- `clamp()` values are optimized for **320px - 1920px** viewports
+- Maximum font size is capped via clamp (e.g., `12rem` max for hero)
+- No additional breakpoint adjustments needed beyond clamp()
+
+```css
+/* Final type scale */
+--text-hero: clamp(3rem, 12vw, 10rem); /* Capped at 10rem for ultrawide */
+--text-title: clamp(1.75rem, 5vw, 3.5rem);
+--text-subtitle: clamp(1.125rem, 2.5vw, 1.75rem);
+--text-stat: clamp(2.5rem, 8vw, 6rem);
+--text-body: clamp(0.9rem, 1.5vw, 1.125rem);
+--text-caption: clamp(0.75rem, 1vw, 0.875rem);
+```
+
+---
+
+### J.9 Performance & Optimization
+
+#### J.9.1 Data Preloading Strategy
+
+**Decisions:**
+
+- **Preload all data** before story mode starts (in IntroChapter loading state)
+- Use React Query with **aggressive caching** (staleTime: Infinity during session)
+- Individual chapters use cached data, no re-fetching
+- If a chapter's data isn't ready (shouldn't happen), show skeleton loader
+
+```typescript
+// Preload all data in useChapterData
+function useChapterData() {
+  const queries = useQueries({
+    queries: [
+      { queryKey: ["topTen"], queryFn: fetchTopTen, staleTime: Infinity },
+      { queryKey: ["movies"], queryFn: fetchMovies, staleTime: Infinity },
+      { queryKey: ["shows"], queryFn: fetchShows, staleTime: Infinity },
+      { queryKey: ["punchCard"], queryFn: fetchPunchCard, staleTime: Infinity },
+      {
+        queryKey: ["deviceStats"],
+        queryFn: fetchDeviceStats,
+        staleTime: Infinity,
+      },
+      { queryKey: ["calendar"], queryFn: fetchCalendar, staleTime: Infinity },
+      {
+        queryKey: ["monthlyStats"],
+        queryFn: fetchMonthlyStats,
+        staleTime: Infinity,
+      },
+    ],
+  });
+
+  const isLoading = queries.some((q) => q.isLoading);
+  const error = queries.find((q) => q.error)?.error;
+
+  return { isLoading, error, data: aggregateData(queries) };
+}
+```
+
+#### J.9.2 Image Loading Strategy
+
+**Decisions:**
+
+- Poster images are **preloaded** for the current chapter + next chapter
+- Missing poster images show a **styled placeholder** (not skipped)
+- Use `loading="eager"` for current chapter, `loading="lazy"` for others
+
+```typescript
+// Image preloading
+function useImagePreloader(items: { posterUrl: string }[], currentIndex: number) {
+  useEffect(() => {
+    // Preload current and next 3 items
+    const toPreload = items.slice(currentIndex, currentIndex + 4);
+    toPreload.forEach(item => {
+      if (item.posterUrl) {
+        const img = new Image();
+        img.src = item.posterUrl;
+      }
+    });
+  }, [currentIndex, items]);
+}
+
+// Poster placeholder
+function PosterImage({ src, alt }: Props) {
+  const [error, setError] = useState(false);
+
+  if (error || !src) {
+    return (
+      <div className="poster-placeholder">
+        <FilmIcon />
+        <span>{alt}</span>
+      </div>
+    );
+  }
+
+  return <img src={src} alt={alt} onError={() => setError(true)} />;
+}
+```
+
+---
+
+### J.10 Accessibility & Edge Cases
+
+#### J.10.1 Reduced Motion Implementation
+
+**Decisions:**
+
+- With `prefers-reduced-motion: reduce`:
+  - All animations **complete instantly** (duration: 0)
+  - Page transitions use **opacity fade only** (no transforms)
+  - Confetti is **completely disabled**
+  - Particle effects are **disabled**
+  - Number counting shows **final value immediately**
+
+```typescript
+// Motion configuration
+const motionConfig = prefersReducedMotion
+  ? {
+      duration: 0,
+      staggerChildren: 0,
+      transition: { duration: 0 },
+    }
+  : {
+      duration: 0.6,
+      staggerChildren: 0.15,
+      transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+    };
+
+// Disable effects
+const showParticles = !prefersReducedMotion;
+const showConfetti = !prefersReducedMotion;
+```
+
+#### J.10.2 Screen Reader Experience
+
+**Decisions:**
+
+- Screen reader users get the **same story experience** (not a different one)
+- Animated numbers are announced **after animation completes** (or immediately if reduced motion)
+- Each chapter is a `<section role="region">` with appropriate `aria-label`
+- Focus management: focus moves to chapter heading when chapter changes
+- No "text-only" mode - the experience is already semantic HTML
+
+```typescript
+// Screen reader announcements
+<AnimatedNumber
+  value={2847}
+  onComplete={() => {
+    announce(`You watched ${2847} hours this year`);
+  }}
+  aria-hidden="true" // Hide during animation
+/>
+<span className="sr-only" aria-live="polite">
+  {isComplete && `You watched ${value} hours this year`}
+</span>
+```
+
+#### J.10.3 Edge Case: Very Little/Much Data
+
+**Decisions:**
+
+**Minimal data (< 10 hours):**
+
+- Show abbreviated story: Intro → Big Number → Top 10 (if any) → Finale
+- Skip: Genres, Habits, Deep Cuts, Journey, Fun Facts
+- Finale shows encouraging message: "Just getting started!"
+
+**Massive data (> 5,000 hours):**
+
+- Show full story, no changes
+- Top 10 remains Top 10 (not Top 20)
+- Fun facts acknowledge the achievement: "You're in the big leagues"
+
+```typescript
+// Minimal data handling
+const isMinimalData = data.totalMinutes < 600; // < 10 hours
+
+const activeChapters = isMinimalData
+  ? ["intro", "big-number", "top-ten", "finale"].filter(/* has data */)
+  : allChapters.filter(/* has data */);
+```
+
+---
+
+### J.11 Implementation Priority
+
+#### J.11.1 Migration Strategy
+
+**Decisions:**
+
+- Old pages are **NOT removed incrementally** - they're replaced all at once
+- Use a **feature flag** during development to toggle between old/new
+- Old pages are **deleted** (not deprecated) once story mode is complete
+- Navigation menu is **replaced entirely** (not updated incrementally)
+
+```typescript
+// Feature flag (development only)
+const USE_STORY_MODE = import.meta.env.VITE_STORY_MODE === 'true';
+
+function App() {
+  return USE_STORY_MODE ? <StoryApp /> : <LegacyApp />;
+}
+```
+
+#### J.11.2 Implementation Order
+
+```
+Phase 1: Foundation (Week 1-2)
+├── CSS tokens & color system
+├── Typography setup (fonts)
+├── StorySlide base component
+├── StoryContainer with navigation
+├── Background effects (aurora, grain)
+└── Feature flag setup
+
+Phase 2: Core Chapters (Week 3-4)
+├── IntroChapter (with loading state)
+├── BigNumberChapter
+├── TopTenChapter (with carousel)
+├── GenresChapter
+└── useChapterData hook
+
+Phase 3: Additional Chapters (Week 5-6)
+├── HabitsChapter (heatmap)
+├── DeepCutsChapter
+├── JourneyChapter (timeline)
+├── FunFactsChapter
+└── FinaleChapter (with share card)
+
+Phase 4: Polish & Migration (Week 7-8)
+├── Animations & transitions
+├── Mobile gesture optimization
+├── Accessibility audit
+├── Legacy route redirects
+├── Remove feature flag
+└── Delete old page components
+```
+
+#### J.11.3 Backward Compatibility
+
+**Decisions:**
+
+- Bookmarks to old routes (`/movies`, etc.) **redirect to `/story`**
+- URL parameters (e.g., `?timeframe=2024`) are **preserved** and passed to story mode
+- Users with old bookmarks see a toast: "Welcome to the new Jellyfin Wrapped!"
+
+```typescript
+// Legacy redirect with param preservation
+function LegacyRedirect({ to }: { to: string }) {
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const newUrl = `${to}?${searchParams.toString()}`;
+    toast.info("Welcome to the new Jellyfin Wrapped!");
+    navigate(newUrl, { replace: true });
+  }, []);
+
+  return null;
+}
+```
+
+---
+
+## Appendix K: Quick Reference Card
+
+### Essential Decisions Summary
+
+| Topic                | Decision                                       |
+| -------------------- | ---------------------------------------------- |
+| **User flow**        | Splash → Configure (if needed) → Story         |
+| **Old routes**       | Redirect to `/story`                           |
+| **Chapter skipping** | Auto-skip if no data, fewer progress dots      |
+| **Empty state**      | Hide chapter entirely                          |
+| **Error handling**   | Skip failed chapter, continue story            |
+| **Timeframe**        | Select on Splash, stored in localStorage       |
+| **Navigation menu**  | Removed entirely in story mode                 |
+| **Share feature**    | Finale chapter only, download/clipboard/native |
+| **Percentile**       | Not implemented in v1                          |
+| **Animation skip**   | Tap to skip counting animations                |
+| **Auto-advance**     | No - user controls navigation                  |
+| **Escape key**       | Shows exit confirmation modal                  |
+| **Swipe threshold**  | 50px minimum distance                          |
+| **Data loading**     | Preload all in Intro, cache for session        |
+| **Reduced motion**   | Instant transitions, no particles/confetti     |
+| **Minimal data**     | Abbreviated story (4 chapters)                 |
+| **Feature flag**     | `VITE_STORY_MODE` during development           |
+
+---
+
+_"Your year. Your story. Your premiere."_
 
 🎬✨
