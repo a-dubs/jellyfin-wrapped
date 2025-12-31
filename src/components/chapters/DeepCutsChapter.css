@@ -1,0 +1,130 @@
+.deep-cuts-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.deep-cuts-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.deep-cuts-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.deep-cuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-xl);
+  width: 100%;
+  max-width: 900px;
+}
+
+.deep-cuts-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.deep-cuts-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 107, 107, 0.3);
+  border-color: var(--accent-coral);
+}
+
+.deep-cuts-poster {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.deep-cuts-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deep-cuts-rating {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: rgba(0, 0, 0, 0.8);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.deep-cuts-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.deep-cuts-item-title {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.deep-cuts-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.deep-cuts-label {
+  font-family: var(--font-display);
+  font-size: var(--text-caption);
+  color: var(--accent-coral);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .deep-cuts-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .deep-cuts-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .deep-cuts-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+}

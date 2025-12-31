@@ -1,0 +1,130 @@
+.journey-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.journey-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.journey-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.journey-timeline {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 900px;
+  height: 300px;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.journey-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  flex: 1;
+  height: 100%;
+}
+
+.journey-bar-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.journey-bar {
+  width: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--accent-cyan) 0%,
+    var(--accent-electric) 100%
+  );
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: opacity 0.3s ease-out;
+  box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+}
+
+.journey-month:hover .journey-bar {
+  opacity: 0.8;
+}
+
+.journey-month-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-top: var(--space-xs);
+}
+
+.journey-month-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-caption);
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+.journey-insights {
+  display: flex;
+  gap: var(--space-xl);
+  margin-top: var(--space-lg);
+}
+
+.journey-insight {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.journey-insight strong {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  .journey-timeline {
+    gap: var(--space-xs);
+    height: 250px;
+  }
+
+  .journey-bar-container {
+    height: 150px;
+  }
+
+  .journey-month-label,
+  .journey-month-value {
+    font-size: 0.625rem;
+  }
+
+  .journey-insights {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}

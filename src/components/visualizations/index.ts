@@ -5,3 +5,4 @@ export { TopTenCarousel } from "./TopTenCarousel";
 export type { TopTenItem } from "./TopTenCarousel";
 export { GenrePieChart, prepareGenreData, getGenreIcon } from "./GenrePieChart";
 export type { GenreData } from "./GenrePieChart";
+export { ViewingHeatmap } from "./ViewingHeatmap";

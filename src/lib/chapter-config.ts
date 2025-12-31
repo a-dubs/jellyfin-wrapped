@@ -32,35 +32,46 @@ export const CHAPTER_CONFIGS: ChapterConfig[] = [
     number: 4,
     shouldShow: (data) => data.hasGenres,
   },
-  // Future chapters (not yet implemented):
-  // {
-  //   id: "habits",
-  //   number: 5,
-  //   shouldShow: (data) => data.heatmap.length > 0,
-  // },
-  // {
-  //   id: "deep-cuts",
-  //   number: 6,
-  //   shouldShow: (data) =>
-  //     data.oldestMovie ||
-  //     data.oldestShow ||
-  //     data.criticallyAcclaimed.length > 0,
-  // },
-  // {
-  //   id: "journey",
-  //   number: 7,
-  //   shouldShow: (data) => data.monthlyStats.length > 0,
-  // },
-  // {
-  //   id: "fun-facts",
-  //   number: 8,
-  //   shouldShow: (data) => data.facts.length >= 2,
-  // },
-  // {
-  //   id: "finale",
-  //   number: 9,
-  //   shouldShow: () => true, // Always show
-  // },
+  {
+    id: "habits",
+    number: 5,
+    shouldShow: (data) => data.punchCardData.length > 0,
+  },
+  {
+    id: "deep-cuts",
+    number: 6,
+    shouldShow: (data) =>
+      !!data.oldestMovie ||
+      !!data.oldestShow ||
+      data.criticallyAcclaimed.length > 0,
+  },
+  {
+    id: "journey",
+    number: 7,
+    shouldShow: (data) => data.monthlyStats.length > 0,
+  },
+  {
+    id: "fun-facts",
+    number: 8,
+    shouldShow: (data) => {
+      // Check if we have enough data to generate at least 2 fun facts
+      // This is a rough check - actual filtering happens in the component
+      const hasEnoughData =
+        data.totalMinutes > 0 ||
+        data.hasMovies ||
+        data.hasShows ||
+        data.unfinishedShows.length > 0 ||
+        data.criticallyAcclaimed.length > 0 ||
+        !!data.oldestMovie ||
+        !!data.oldestShow;
+      return hasEnoughData;
+    },
+  },
+  {
+    id: "finale",
+    number: 9,
+    shouldShow: () => true, // Always show
+  },
 ];
 
 /**

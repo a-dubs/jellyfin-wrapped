@@ -7,6 +7,11 @@ import {
   BigNumberChapter,
   TopTenChapter,
   GenresChapter,
+  HabitsChapter,
+  DeepCutsChapter,
+  JourneyChapter,
+  FunFactsChapter,
+  FinaleChapter,
 } from "../chapters";
 import { useChapterData } from "@/hooks/story/useChapterData";
 import { getActiveChapters } from "@/lib/chapter-config";
@@ -70,6 +75,25 @@ export const StoryModePage = () => {
           break;
         case "genres":
           components.push(<GenresChapter key="genres" isActive={isActive} />);
+          break;
+        case "habits":
+          components.push(<HabitsChapter key="habits" isActive={isActive} />);
+          break;
+        case "deep-cuts":
+          components.push(
+            <DeepCutsChapter key="deep-cuts" isActive={isActive} />
+          );
+          break;
+        case "journey":
+          components.push(<JourneyChapter key="journey" isActive={isActive} />);
+          break;
+        case "fun-facts":
+          components.push(
+            <FunFactsChapter key="fun-facts" isActive={isActive} />
+          );
+          break;
+        case "finale":
+          components.push(<FinaleChapter key="finale" isActive={isActive} />);
           break;
         default:
           // Log skipped chapters for debugging

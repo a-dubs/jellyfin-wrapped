@@ -1,0 +1,38 @@
+.fun-facts-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-xl);
+  gap: var(--space-xl);
+}
+
+.fun-facts-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.fun-facts-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .fun-facts-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .fun-facts-subtitle {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+}

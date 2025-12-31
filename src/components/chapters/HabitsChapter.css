@@ -1,0 +1,93 @@
+.habits-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-xl);
+  gap: var(--space-2xl);
+}
+
+.habits-title {
+  font-family: var(--font-display);
+  font-size: var(--text-title);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.habits-heatmap-container {
+  width: 100%;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.habits-personality {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.habits-personality-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-xl);
+  background: rgba(108, 99, 255, 0.1);
+  border: 2px solid var(--accent-electric);
+  border-radius: 12px;
+  box-shadow: var(--glow-cyan);
+}
+
+.habits-personality-emoji {
+  font-size: 2rem;
+}
+
+.habits-personality-label {
+  font-family: var(--font-display);
+  font-size: var(--text-subtitle);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-electric);
+}
+
+.habits-insight,
+.habits-peak {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.habits-peak {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .habits-chapter {
+    padding: var(--space-md);
+    gap: var(--space-xl);
+  }
+
+  .habits-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .habits-personality-badge {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .habits-personality-label {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+  }
+}

@@ -1,0 +1,133 @@
+.share-card {
+  width: 600px;
+  max-width: 90vw;
+  aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-coral) 100%);
+  border-radius: 24px;
+  padding: var(--space-2xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.share-card-content {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-void);
+  border-radius: 16px;
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 4px solid var(--accent-gold);
+}
+
+.share-card-header {
+  text-align: center;
+  width: 100%;
+}
+
+.share-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-gold);
+  margin: 0;
+}
+
+.share-card-year {
+  font-family: var(--font-mono);
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: var(--space-sm) 0 0;
+}
+
+.share-card-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  flex: 1;
+  justify-content: center;
+}
+
+.share-card-icon {
+  font-size: 4rem;
+}
+
+.share-card-hours {
+  font-family: var(--font-mono);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.share-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  margin: var(--space-lg) 0;
+}
+
+.share-card-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.share-card-label {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.share-card-value {
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  color: var(--text-primary);
+  font-weight: 700;
+  text-align: right;
+  max-width: 60%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.share-card-footer {
+  width: 100%;
+  text-align: center;
+}
+
+.share-card-badge {
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--space-sm) var(--space-lg);
+  background: rgba(255, 217, 61, 0.1);
+  border-radius: 8px;
+  display: inline-block;
+}
+
+@media (max-width: 640px) {
+  .share-card {
+    width: 90vw;
+    padding: var(--space-lg);
+  }
+
+  .share-card-content {
+    padding: var(--space-lg);
+  }
+}
