@@ -3,3 +3,7 @@ export { BigNumberChapter } from "./BigNumberChapter";
 export { TopTenChapter } from "./TopTenChapter";
 export { GenresChapter } from "./GenresChapter";
 export { HabitsChapter } from "./HabitsChapter";
+export { DeepCutsChapter } from "./DeepCutsChapter";
+export { JourneyChapter } from "./JourneyChapter";
+export { FunFactsChapter } from "./FunFactsChapter";
+export { FinaleChapter } from "./FinaleChapter";
