@@ -7,6 +7,7 @@ A web application that generates personalized year-in-review statistics for your
 **DO NOT host this application publicly on the internet when using API keys as environment variables.** The API key is embedded in the frontend JavaScript bundle and will be visible to anyone who visits your site. This could expose your Jellyfin server to unauthorized access.
 
 **Recommended deployment options:**
+
 - Host locally on your home network only
 - Use behind a VPN or authentication proxy
 - Deploy on a private network/intranet
@@ -35,10 +36,12 @@ A web application that generates personalized year-in-review statistics for your
 The application requires the following environment variables to be set:
 
 **For Development (Vite):**
+
 - `VITE_JELLYFIN_SERVER_URL`: The URL of your Jellyfin server (e.g., `http://192.168.1.100:8096`)
 - `VITE_JELLYFIN_API_KEY`: An admin API key for accessing playback reporting data
 
 **For Production (Docker/Runtime):**
+
 - `JELLYFIN_SERVER_URL`: The URL of your Jellyfin server (e.g., `http://192.168.1.100:8096`)
 - `JELLYFIN_API_KEY`: An admin API key for accessing playback reporting data
 
@@ -84,16 +87,31 @@ This project is built with:
 
 ### Local Development
 
+**Quick Start**: See [LOCAL_TESTING.md](./LOCAL_TESTING.md) for detailed local testing instructions.
+
 ```bash
 # Clone the repository
 git clone https://github.com/johnpc/jellyfin-wrapped.git
+cd jellyfin-wrapped
 
 # Install dependencies
 npm install
+cd backend && npm install && cd ..
 
-# Start development server
+# Set up environment variables
+# 1. Create backend/.env (see backend/.env.example)
+# 2. Add your JELLYFIN_SERVER_URL and JELLYFIN_API_KEY
+
+# Start backend server (in one terminal)
+cd backend
+npm run dev
+
+# Start frontend dev server (in another terminal)
+cd .. # back to project root
 npm run dev
 ```
+
+**Note**: With the backend API proxy, you need to run both the backend and frontend servers. The backend handles the admin API key securely server-side.
 
 ## Building for Production
 
