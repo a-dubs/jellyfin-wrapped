@@ -1,6 +1,5 @@
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useFavoriteActors } from "@/hooks/queries/useFavoriteActors";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -11,20 +10,19 @@ import PageContainer from "../PageContainer";
 import { generateGuid } from "@/lib/utils";
 import { BaseItemPerson } from "@jellyfin/sdk/lib/generated-client";
 import { SimpleItemDto } from "@/lib/queries";
-import { useEffect } from "react";
-
-const NEXT_PAGE = "/genres";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function FavoriteActorsPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: favoriteActors, isLoading, error } = useFavoriteActors();
 
-  useEffect(() => {
-    if (!isLoading && !error && favoriteActors && !favoriteActors.length) {
-      void navigate(NEXT_PAGE);
-    }
-  }, [isLoading, error, favoriteActors, navigate]);
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: favoriteActors,
+    isLoading,
+    error,
+    isEmpty: (data) => !data || data.length === 0,
+  });
 
   if (error) {
     showBoundary(error);
@@ -39,7 +37,7 @@ export default function FavoriteActorsPage() {
   }
 
   return (
-    <PageContainer backgroundColor="var(--orange-8)" nextPage={NEXT_PAGE} previousPage="/music-videos">
+    <PageContainer backgroundColor="var(--orange-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

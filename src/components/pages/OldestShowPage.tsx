@@ -1,6 +1,5 @@
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useShows } from "@/hooks/queries/useShows";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -9,12 +8,10 @@ import { Subtitle, Title } from "../ui/styled";
 import { itemVariants } from "@/lib/styled-variants";
 import { SimpleItemDto } from "@/lib/queries";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/holidays";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function OldestShowPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: shows, isLoading, error } = useShows();
 
   if (error) {
@@ -35,13 +32,19 @@ export default function OldestShowPage() {
 
   const show = sortedShows[0];
 
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: show,
+    isLoading,
+    error,
+  });
+
   if (!show) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--lime-8)" nextPage={NEXT_PAGE} previousPage="/oldest-movie">
+    <PageContainer backgroundColor="var(--lime-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

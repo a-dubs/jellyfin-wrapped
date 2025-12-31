@@ -4,27 +4,13 @@ import { styled } from "@stitches/react";
 import { motion } from "framer-motion";
 import TimeframeSelector from "./TimeframeSelector";
 import { TimeframeOption } from "../lib/timeframe";
+import { pageFlowConfig } from "@/lib/page-flow";
 
-// Define navigation items with their paths and display names
-const navigationItems = [
-  { path: "/TopTen", name: "Top 10" },
-  { path: "/movies", name: "Movies" },
-  { path: "/shows", name: "TV Shows" },
-  { path: "/audio", name: "Music" },
-  { path: "/music-videos", name: "Music Videos" },
-  { path: "/actors", name: "Favorite Actors" },
-  { path: "/genres", name: "Genres" },
-  { path: "/tv", name: "Live TV" },
-  { path: "/critically-acclaimed", name: "Critically Acclaimed" },
-  { path: "/oldest-movie", name: "Oldest Movie" },
-  { path: "/oldest-show", name: "Oldest Show" },
-  { path: "/holidays", name: "Holiday Watching" },
-  { path: "/minutes-per-day", name: "Minutes Per Day" },
-  { path: "/show-of-the-month", name: "Show of the Month" },
-  { path: "/unfinished-shows", name: "Unfinished Shows" },
-  { path: "/device-stats", name: "Device Stats" },
-  { path: "/punch-card", name: "Activity Calendar" },
-];
+// Use page flow config for navigation items (automatically excludes removed pages like holidays)
+const navigationItems = pageFlowConfig.map((page) => ({
+  path: page.path,
+  name: page.name,
+}));
 
 const Navigation = () => {
   const navigate = useNavigate();

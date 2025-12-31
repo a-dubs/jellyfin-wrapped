@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
 import { Box, Button, Flex } from "@radix-ui/themes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { styled } from "@stitches/react";
+import { getNextPage, getPreviousPage } from "@/lib/page-flow";
 
 interface PageContainerProps {
   children: ReactNode;
@@ -13,10 +14,15 @@ interface PageContainerProps {
 const PageContainer = ({
   children,
   backgroundColor = "var(--purple-8)",
-  nextPage,
-  previousPage,
+  nextPage: nextPageOverride,
+  previousPage: previousPageOverride,
 }: PageContainerProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Use dynamic navigation if not overridden
+  const nextPage = nextPageOverride ?? getNextPage(location.pathname) ?? undefined;
+  const previousPage = previousPageOverride ?? getPreviousPage(location.pathname) ?? undefined;
 
   return (
     <Box style={{ backgroundColor, minHeight: "100vh", display: "flex", flexDirection: "column" }}>

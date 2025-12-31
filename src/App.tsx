@@ -19,7 +19,6 @@ import OldestShowPage from "./components/pages/OldestShowPage";
 import OldestMoviePage from "./components/pages/OldestMoviePage";
 import MusicVideoPage from "./components/pages/MusicVideoPage";
 import GenreReviewPage from "./components/pages/GenreReviewPage";
-import HolidayReviewPage from "./components/pages/HolidayReviewPage";
 import MinutesPlayedPerDayPage from "./components/pages/MinutesPlayedPerDayPage";
 import DeviceStatsPage from "./components/pages/DeviceStatsPage";
 import ShowOfTheMonthPage from "./components/pages/ShowOfTheMonthPage";
@@ -127,10 +126,6 @@ const router = createBrowserRouter([
       {
         path: "/genres",
         element: <GenreReviewPage />,
-      },
-      {
-        path: "/holidays",
-        element: <HolidayReviewPage />,
       },
       {
         path: "/minutes-per-day",

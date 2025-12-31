@@ -1,6 +1,5 @@
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMovies } from "@/hooks/queries/useMovies";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -8,12 +7,10 @@ import { MovieCard } from "./MoviesReviewPage/MovieCard";
 import { Subtitle, Title } from "../ui/styled";
 import { itemVariants } from "@/lib/styled-variants";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/oldest-show";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function OldestMoviePage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: movies, isLoading, error } = useMovies();
 
   if (error) {
@@ -34,13 +31,19 @@ export default function OldestMoviePage() {
 
   const movie = sortedMovies[0];
 
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: movie,
+    isLoading,
+    error,
+  });
+
   if (!movie) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--teal-8)" nextPage={NEXT_PAGE} previousPage="/critically-acclaimed">
+    <PageContainer backgroundColor="var(--teal-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

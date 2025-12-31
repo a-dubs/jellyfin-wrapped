@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Grid, Card, Text } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMonthlyShowStats } from "@/hooks/queries/useMonthlyShowStats";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -11,8 +10,7 @@ import { format } from "date-fns";
 import { getImageUrlById, SimpleItemDto } from "@/lib/queries";
 import { formatWatchTime } from "@/lib/time-helpers";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/unfinished-shows";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 type MonthlyShowStats = {
   month: Date;
@@ -26,7 +24,6 @@ type MonthlyShowStats = {
 
 export default function ShowOfTheMonthPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: stats, isLoading, error } = useMonthlyShowStats();
   const [statsWithPosters, setStatsWithPosters] = useState<MonthlyShowStats[]>(
     []
@@ -50,6 +47,14 @@ export default function ShowOfTheMonthPage() {
     void fetchPosters();
   }, [stats]);
 
+  // Automatically skip this page if no data (check original stats data)
+  usePageDataCheck({
+    data: stats,
+    isLoading,
+    error,
+    isEmpty: (data) => !data || data.length === 0,
+  });
+
   if (error) {
     showBoundary(error);
   }
@@ -59,12 +64,11 @@ export default function ShowOfTheMonthPage() {
   }
 
   if (!statsWithPosters.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--bronze-8)" nextPage={NEXT_PAGE} previousPage="/minutes-per-day">
+    <PageContainer backgroundColor="var(--bronze-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

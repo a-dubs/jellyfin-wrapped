@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMovies } from "@/hooks/queries/useMovies";
 import { MovieCard } from "./MoviesReviewPage/MovieCard";
@@ -11,14 +10,24 @@ import PageContainer from "../PageContainer";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { getCachedHiddenIds, setCachedHiddenId } from "@/lib/cache";
 import { generateGuid } from "@/lib/utils";
-
-const NEXT_PAGE = "/shows";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function MoviesReviewPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: movies, isLoading, error } = useMovies();
   const [hiddenIds, setHiddenIds] = useState<string[]>(getCachedHiddenIds());
+
+  const visibleMovies =
+    movies?.filter(
+      (movie: { id?: string }) => !hiddenIds.includes(movie.id ?? "")
+    ) ?? [];
+
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: visibleMovies,
+    isLoading,
+    error,
+  });
 
   if (error) {
     showBoundary(error);
@@ -28,18 +37,12 @@ export default function MoviesReviewPage() {
     return <LoadingSpinner />;
   }
 
-  const visibleMovies =
-    movies?.filter(
-      (movie: { id?: string }) => !hiddenIds.includes(movie.id ?? "")
-    ) ?? [];
-
   if (!visibleMovies.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--purple-8)" nextPage={NEXT_PAGE} previousPage="/TopTen">
+    <PageContainer backgroundColor="var(--purple-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

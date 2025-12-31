@@ -6,15 +6,13 @@ import {
   Flex,
 } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useLiveTvChannels } from "@/hooks/queries/useLiveTvChannels";
 import { LoadingSpinner } from "../LoadingSpinner";
 import { formatDuration } from "@/lib/utils";
 import { Title } from "../ui/styled";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/critically-acclaimed";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 function ChannelCard({
   channelName,
@@ -45,8 +43,20 @@ function ChannelCard({
 
 export default function LiveTvReviewPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: channels, isLoading, error } = useLiveTvChannels();
+
+  const sortedChannels = [...(channels ?? [])].sort(
+    (a: { duration: number }, b: { duration: number }) =>
+      b.duration - a.duration
+  );
+
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: sortedChannels,
+    isLoading,
+    error,
+    isEmpty: (data) => !data || data.length === 0,
+  });
 
   if (error) {
     showBoundary(error);
@@ -56,18 +66,12 @@ export default function LiveTvReviewPage() {
     return <LoadingSpinner />;
   }
 
-  const sortedChannels = [...(channels ?? [])].sort(
-    (a: { duration: number }, b: { duration: number }) =>
-      b.duration - a.duration
-  );
-
   if (!sortedChannels.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--blue-8)" nextPage={NEXT_PAGE} previousPage="/genres">
+    <PageContainer backgroundColor="var(--blue-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

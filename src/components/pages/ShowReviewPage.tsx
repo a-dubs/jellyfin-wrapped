@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useShows } from "@/hooks/queries/useShows";
 import { MovieCard } from "./MoviesReviewPage/MovieCard";
@@ -10,12 +9,10 @@ import { getCachedHiddenIds, setCachedHiddenId } from "@/lib/cache";
 import { Title } from "../ui/styled";
 import { itemVariants } from "@/lib/styled-variants";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/audio";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function ShowReviewPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: shows, isLoading, error } = useShows();
   const [hiddenIds, setHiddenIds] = useState<string[]>(getCachedHiddenIds());
 
@@ -25,11 +22,12 @@ export default function ShowReviewPage() {
         !hiddenIds.includes(show.item.id ?? "")
     ) ?? [];
 
-  useEffect(() => {
-    if (!isLoading && !error && shows && !visibleShows.length) {
-      void navigate(NEXT_PAGE);
-    }
-  }, [isLoading, error, shows, visibleShows.length, navigate]);
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: visibleShows,
+    isLoading,
+    error,
+  });
 
   if (error) {
     showBoundary(error);
@@ -44,7 +42,7 @@ export default function ShowReviewPage() {
   }
 
   return (
-    <PageContainer backgroundColor="var(--yellow-8)" nextPage={NEXT_PAGE} previousPage="/movies">
+    <PageContainer backgroundColor="var(--yellow-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

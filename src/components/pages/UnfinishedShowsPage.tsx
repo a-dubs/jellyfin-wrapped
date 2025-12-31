@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container, Grid, Card, Text } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useUnfinishedShows } from "@/hooks/queries/useUnfinishedShows";
 import { LoadingSpinner } from "../LoadingSpinner";
@@ -10,14 +9,12 @@ import { itemVariants } from "@/lib/styled-variants";
 import { format } from "date-fns";
 import { getImageUrlById, UnfinishedShowDto } from "@/lib/queries";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/device-stats";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 type ShowWithPoster = UnfinishedShowDto & { posterUrl?: string };
 
 export default function UnfinishedShowsPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: shows, isLoading, error } = useUnfinishedShows();
   const [showsWithPosters, setShowsWithPosters] = useState<ShowWithPoster[]>(
     []
@@ -41,6 +38,14 @@ export default function UnfinishedShowsPage() {
     void fetchPosters();
   }, [shows]);
 
+  // Automatically skip this page if no data (check original shows data)
+  usePageDataCheck({
+    data: shows,
+    isLoading,
+    error,
+    isEmpty: (data) => !data || data.length === 0,
+  });
+
   if (error) {
     showBoundary(error);
   }
@@ -50,12 +55,11 @@ export default function UnfinishedShowsPage() {
   }
 
   if (!showsWithPosters.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--plum-8)" nextPage={NEXT_PAGE} previousPage="/show-of-the-month">
+    <PageContainer backgroundColor="var(--plum-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

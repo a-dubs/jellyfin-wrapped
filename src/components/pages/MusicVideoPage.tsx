@@ -1,6 +1,5 @@
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMusicVideos } from "@/hooks/queries/useMusicVideos";
 import { MovieCard } from "./MoviesReviewPage/MovieCard";
@@ -8,13 +7,19 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import { Title } from "../ui/styled";
 import { itemVariants } from "@/lib/styled-variants";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/actors";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function MusicVideoPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const { data: musicVideos, isLoading, error } = useMusicVideos();
+
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: musicVideos,
+    isLoading,
+    error,
+    isEmpty: (data) => !data || data.length === 0,
+  });
 
   if (error) {
     showBoundary(error);
@@ -25,12 +30,11 @@ export default function MusicVideoPage() {
   }
 
   if (!musicVideos?.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--red-8)" nextPage={NEXT_PAGE} previousPage="/audio">
+    <PageContainer backgroundColor="var(--red-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

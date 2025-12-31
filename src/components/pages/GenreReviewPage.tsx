@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Container, Grid } from "@radix-ui/themes";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMovies } from "@/hooks/queries/useMovies";
 import { useShows } from "@/hooks/queries/useShows";
@@ -13,12 +12,10 @@ import { generateGuid } from "@/lib/utils";
 import { getCachedHiddenIds, setCachedHiddenId } from "@/lib/cache";
 import { getTopGenre } from "@/lib/genre-helpers";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/tv";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function GenreReviewPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const {
     data: movies,
     isLoading: moviesLoading,
@@ -51,13 +48,19 @@ export default function GenreReviewPage() {
 
   const topGenreData = getTopGenre(visibleMovies, visibleShows);
 
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: topGenreData,
+    isLoading: moviesLoading || showsLoading,
+    error: moviesError || showsError || null,
+  });
+
   if (!topGenreData) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--pink-8)" nextPage={NEXT_PAGE} previousPage="/actors">
+    <PageContainer backgroundColor="var(--pink-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>

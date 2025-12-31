@@ -8,7 +8,6 @@ import {
 import { motion } from "framer-motion";
 import { Title } from "../ui/styled";
 import { itemVariants } from "@/lib/styled-variants";
-import { useNavigate } from "react-router-dom";
 import { useErrorBoundary } from "react-error-boundary";
 import { useMovies } from "@/hooks/queries/useMovies";
 import { useShows } from "@/hooks/queries/useShows";
@@ -16,12 +15,10 @@ import { LoadingSpinner } from "../LoadingSpinner";
 import { ContentImage } from "../ContentImage";
 import { getTopRatedContent, TopContent } from "@/lib/rating-helpers";
 import PageContainer from "../PageContainer";
-
-const NEXT_PAGE = "/oldest-movie";
+import { usePageDataCheck } from "@/hooks/usePageDataCheck";
 
 export default function CriticallyAcclaimedPage() {
   const { showBoundary } = useErrorBoundary();
-  const navigate = useNavigate();
   const {
     data: movies,
     isLoading: moviesLoading,
@@ -42,13 +39,20 @@ export default function CriticallyAcclaimedPage() {
 
   const topContent = getTopRatedContent(movies ?? [], shows ?? []);
 
+  // Automatically skip this page if no data
+  usePageDataCheck({
+    data: topContent,
+    isLoading: moviesLoading || showsLoading,
+    error: moviesError || showsError || null,
+    isEmpty: (data) => !data || data.length === 0,
+  });
+
   if (!topContent.length) {
-    void navigate(NEXT_PAGE);
     return null;
   }
 
   return (
-    <PageContainer backgroundColor="var(--cyan-8)" nextPage={NEXT_PAGE} previousPage="/tv">
+    <PageContainer backgroundColor="var(--cyan-8)">
       <Container size="4" p="4">
         <Grid gap="6">
           <div style={{ textAlign: "center" }}>
