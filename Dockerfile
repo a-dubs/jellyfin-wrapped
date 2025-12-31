@@ -1,64 +1,55 @@
 # Stage 1: Build frontend
 FROM node:20-alpine AS frontend-builder
 WORKDIR /app
+
+# Copy package files
 COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code and config
 COPY . .
-RUN npm ci
-RUN npm run build
 
-# Stage 2: Build backend
-FROM node:20-alpine AS backend-builder
-WORKDIR /app
-COPY backend/package*.json ./backend/
-COPY backend ./backend/
-WORKDIR /app/backend
-RUN npm ci
-RUN npm run build
+# Build frontend (skip type checking for Docker build - vite handles it)
+RUN npx vite build
 
-# Stage 3: Runtime
-FROM node:20-alpine
+# Stage 2: Runtime with Nginx
+FROM nginx:alpine
 WORKDIR /app
 
-# Install Apache for frontend
-RUN apk add --no-cache apache2
+# Copy built frontend from builder stage
+COPY --from=frontend-builder /app/dist /usr/share/nginx/html
 
-# Copy frontend build
-COPY --from=frontend-builder /app/dist /usr/local/apache2/htdocs/
+# Create nginx config for proxying to backend
+RUN echo 'server {' > /etc/nginx/conf.d/default.conf && \
+    echo '    listen 80;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    server_name _;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    root /usr/share/nginx/html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    index index.html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '' >> /etc/nginx/conf.d/default.conf && \
+    echo '    # Proxy API requests to backend' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location /api {' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_pass http://backend:3000/api;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_http_version 1.1;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header Upgrade $http_upgrade;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header Connection "upgrade";' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header Host $host;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header X-Real-IP $remote_addr;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;' >> /etc/nginx/conf.d/default.conf && \
+    echo '        proxy_set_header X-Forwarded-Proto $scheme;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    }' >> /etc/nginx/conf.d/default.conf && \
+    echo '' >> /etc/nginx/conf.d/default.conf && \
+    echo '    # Serve static files' >> /etc/nginx/conf.d/default.conf && \
+    echo '    location / {' >> /etc/nginx/conf.d/default.conf && \
+    echo '        try_files $uri $uri/ /index.html;' >> /etc/nginx/conf.d/default.conf && \
+    echo '    }' >> /etc/nginx/conf.d/default.conf && \
+    echo '}' >> /etc/nginx/conf.d/default.conf
 
-# Copy backend build
-COPY --from=backend-builder /app/backend/dist ./backend/dist/
-COPY --from=backend-builder /app/backend/package*.json ./backend/
-
-# Install backend production dependencies
-WORKDIR /app/backend
-RUN npm ci --production
-
-# Copy Apache config
-COPY apache-config.conf /usr/local/apache2/conf/extra/apache-config.conf
-
-# Enable necessary Apache modules and configure proxy
-RUN sed -i \
-    -e '/LoadModule substitute_module/s/^#//g' \
-    -e '/LoadModule filter_module/s/^#//g' \
-    -e '/LoadModule env_module/s/^#//g' \
-    -e '/LoadModule proxy_module/s/^#//g' \
-    -e '/LoadModule proxy_http_module/s/^#//g' \
-    /usr/local/apache2/conf/httpd.conf && \
-    echo "Include conf/extra/apache-config.conf" \
-    >> /usr/local/apache2/conf/httpd.conf && \
-    echo "PassEnv JELLYFIN_SERVER_URL" \
-    >> /usr/local/apache2/conf/httpd.conf && \
-    echo "PassEnv BACKEND_API_URL" \
-    >> /usr/local/apache2/conf/httpd.conf && \
-    echo "ProxyPass /api http://localhost:3000/api" \
-    >> /usr/local/apache2/conf/httpd.conf && \
-    echo "ProxyPassReverse /api http://localhost:3000/api" \
-    >> /usr/local/apache2/conf/httpd.conf
-
-# Create start script
-WORKDIR /app
-COPY start.sh .
-RUN chmod +x start.sh
+# Copy entrypoint script for environment variable injection
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
 EXPOSE 80
-CMD ["./start.sh"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]

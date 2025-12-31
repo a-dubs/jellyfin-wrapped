@@ -1,26 +1,48 @@
-version: "3"
+version: "3.8"
 
 services:
-  web:
-    # Build docker image from source
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: jellyfin-wrapped-backend
+    restart: unless-stopped
+    # Read environment variables from backend/.env
+    # Required: JELLYFIN_SERVER_URL, JELLYFIN_API_KEY
+    # Optional: BACKEND_PORT (default: 3000), FRONTEND_URL (default: http://localhost:5173)
+    env_file:
+      - ./backend/.env
+    # Backend is only accessible internally via Docker network
+    expose:
+      - "3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - jellyfin-wrapped-network
+
+  frontend:
     build:
       context: .
       dockerfile: Dockerfile
-
-    # ...Or use published image from Dockerhub (after backend changes are published)
-    # image: mrorbitman/jellyfin-wrapped:latest
-
+    container_name: jellyfin-wrapped-frontend
+    restart: unless-stopped
     ports:
       - "80:80"
-    restart: unless-stopped
-    container_name: jellyfin-wrapped
-    # Required environment variables for Jellyfin Wrapped to function properly
     environment:
-      # Public (can be exposed to frontend)
-      - JELLYFIN_SERVER_URL=http://<your_jellyfin_server>:8096
-      - FRONTEND_URL=http://localhost
-      # Private (backend only, NOT exposed to frontend)
-      - JELLYFIN_API_KEY=<your_admin_api_key>
-      - BACKEND_PORT=3000
-      # Optional: Override backend API URL if needed
-      # - BACKEND_API_URL=/api
+      # Optional: Jellyfin server URL (can also be entered in UI)
+      - JELLYFIN_SERVER_URL=${VITE_JELLYFIN_SERVER_URL:-}
+      # Optional: Backend API URL override (default: /api)
+      - BACKEND_API_URL=${BACKEND_API_URL:-/api}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - jellyfin-wrapped-network
+
+networks:
+  jellyfin-wrapped-network:
+    driver: bridge
