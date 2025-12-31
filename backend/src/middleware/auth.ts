@@ -44,7 +44,7 @@ export const validateUserAuth = async (
     });
 
     const api = jellyfin.createApi(JELLYFIN_SERVER_URL, userAuthToken);
-    const { getUserApi } = await import("@jellyfin/sdk/lib/utils/api");
+    const { getUserApi } = await import("@jellyfin/sdk/lib/utils/api/index.js");
     const userApi = getUserApi(api);
     const user = await userApi.getCurrentUser();
 
