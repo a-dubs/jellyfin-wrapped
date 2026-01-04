@@ -190,7 +190,7 @@ export const StoryContainer = ({
       <StoryProgress
         totalChapters={totalChapters}
         currentChapter={currentChapter}
-        position="bottom"
+        position="side"
       />
       <div className="story-container-slides">{slidesWithActive}</div>
     </div>

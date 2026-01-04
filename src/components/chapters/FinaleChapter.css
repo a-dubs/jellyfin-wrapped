@@ -6,7 +6,8 @@
   width: 100%;
   max-width: 1200px;
   padding: var(--space-xl);
-  gap: var(--space-xl);
+  gap: var(--space-2xl);
+  padding-bottom: var(--space-3xl);
 }
 
 .finale-title {
@@ -17,18 +18,21 @@
   letter-spacing: 0.1em;
   color: var(--text-primary);
   text-align: center;
+  margin-bottom: var(--space-lg);
 }
 
 .finale-card-container {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: var(--space-xl);
 }
 
 .finale-actions {
   display: flex;
   gap: var(--space-lg);
-  margin-top: var(--space-lg);
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-xl);
 }
 
 .finale-button {
@@ -67,12 +71,14 @@
   font-size: var(--text-subtitle);
   color: var(--text-secondary);
   text-align: center;
-  margin-top: var(--space-lg);
+  margin-top: var(--space-xl);
+  opacity: 0.8;
 }
 
 @media (max-width: 640px) {
   .finale-chapter {
     padding: var(--space-md);
+    padding-bottom: var(--space-3xl);
     gap: var(--space-lg);
   }
 
@@ -84,6 +90,7 @@
     flex-direction: column;
     width: 100%;
     max-width: 300px;
+    margin-bottom: var(--space-lg);
   }
 
   .finale-button {

@@ -27,6 +27,11 @@
   top: 50%;
   transform: translateY(-50%);
   flex-direction: column;
+  padding: var(--space-sm) var(--space-xs);
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .story-progress-dot {
@@ -53,7 +58,9 @@
   }
 
   .story-progress-side {
-    display: none;
+    right: var(--space-xs);
+    padding: var(--space-xs);
+    gap: var(--space-xs);
   }
 
   .story-progress-bottom {
