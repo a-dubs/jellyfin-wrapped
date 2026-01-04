@@ -71,6 +71,11 @@
 }
 
 @media (max-width: 640px) {
+  .finale-chapter {
+    padding: var(--space-md);
+    gap: var(--space-lg);
+  }
+
   .finale-title {
     font-size: clamp(1.5rem, 5vw, 2rem);
   }

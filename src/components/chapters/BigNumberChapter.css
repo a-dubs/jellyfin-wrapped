@@ -4,8 +4,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
-  padding: var(--space-xl);
+  height: 100%;
   text-align: center;
 }
 
@@ -81,8 +80,21 @@
 }
 
 @media (max-width: 640px) {
+  .big-number-header {
+    margin-bottom: var(--space-lg);
+  }
+
   .big-number-display {
     min-height: 200px;
+    margin: var(--space-lg) 0;
+  }
+
+  .big-number-divider {
+    margin: var(--space-lg) 0;
+  }
+
+  .big-number-comparisons {
+    margin-top: var(--space-md);
   }
 
   .big-number-title {

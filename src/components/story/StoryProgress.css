@@ -55,4 +55,12 @@
   .story-progress-side {
     display: none;
   }
+
+  .story-progress-bottom {
+    bottom: var(--space-md);
+  }
+
+  .story-progress-top {
+    top: var(--space-md);
+  }
 }

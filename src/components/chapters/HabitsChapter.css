@@ -75,7 +75,7 @@
 @media (max-width: 640px) {
   .habits-chapter {
     padding: var(--space-md);
-    gap: var(--space-xl);
+    gap: var(--space-lg);
   }
 
   .habits-title {

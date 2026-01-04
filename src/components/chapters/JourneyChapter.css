@@ -109,6 +109,11 @@
 }
 
 @media (max-width: 640px) {
+  .journey-chapter {
+    padding: var(--space-md);
+    gap: var(--space-lg);
+  }
+
   .journey-timeline {
     gap: var(--space-xs);
     height: 250px;

@@ -115,6 +115,11 @@
 }
 
 @media (max-width: 640px) {
+  .deep-cuts-chapter {
+    padding: var(--space-md);
+    gap: var(--space-lg);
+  }
+
   .deep-cuts-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: var(--space-md);

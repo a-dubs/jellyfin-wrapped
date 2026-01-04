@@ -4,8 +4,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 100vh;
-  padding: var(--space-xl);
+  height: 100%;
 }
 
 .top-ten-header {
@@ -45,6 +44,10 @@
 }
 
 @media (max-width: 640px) {
+  .top-ten-header {
+    margin-bottom: var(--space-lg);
+  }
+
   .top-ten-title {
     font-size: clamp(1.5rem, 5vw, 2.5rem);
     flex-direction: column;
