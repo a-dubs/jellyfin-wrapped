@@ -2,14 +2,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  height: auto;
+  height: 100%;
   text-align: center;
+  gap: var(--space-md);
 }
 
 .big-number-header {
-  margin-bottom: var(--space-2xl);
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
 .big-number-title {
@@ -32,8 +34,9 @@
 }
 
 .big-number-display {
-  margin: var(--space-2xl) 0;
-  min-height: 300px;
+  margin: var(--space-md) 0;
+  flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,9 +46,10 @@
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin: var(--space-2xl) 0;
+  margin: var(--space-sm) 0;
   width: 100%;
   max-width: 400px;
+  flex-shrink: 0;
 }
 
 .divider-line {
@@ -66,9 +70,10 @@
 }
 
 .big-number-comparisons {
-  margin-top: var(--space-xl);
+  margin-top: 0;
   width: 100%;
   max-width: 600px;
+  flex-shrink: 0;
 }
 
 .comparison-intro {
@@ -80,21 +85,16 @@
 }
 
 @media (max-width: 640px) {
-  .big-number-header {
-    margin-bottom: var(--space-lg);
+  .big-number-chapter {
+    gap: var(--space-sm);
   }
 
   .big-number-display {
-    min-height: 200px;
-    margin: var(--space-lg) 0;
+    margin: var(--space-sm) 0;
   }
 
   .big-number-divider {
-    margin: var(--space-lg) 0;
-  }
-
-  .big-number-comparisons {
-    margin-top: var(--space-md);
+    margin: var(--space-xs) 0;
   }
 
   .big-number-title {
