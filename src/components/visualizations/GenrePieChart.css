@@ -17,6 +17,9 @@
 
 .genre-svg {
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+  max-width: 300px;
+  width: 100%;
+  height: auto;
 }
 
 .genre-segment {
@@ -149,19 +152,44 @@
 }
 
 @media (max-width: 640px) {
+  .genre-pie-chart {
+    gap: var(--space-lg);
+  }
+
   .genre-svg {
-    max-width: 250px;
+    max-width: 220px;
   }
 
   .genre-top-icon {
-    font-size: 2em;
+    font-size: 1.8em;
   }
 
   .genre-top-name {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
   }
 
   .genre-top-percentage {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .genre-legend {
+    gap: var(--space-sm);
+  }
+
+  .genre-legend-item {
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .genre-personality {
+    margin-top: var(--space-md);
+    padding-top: var(--space-md);
+  }
+
+  .personality-label {
+    font-size: 1.1rem;
+  }
+
+  .personality-text {
+    font-size: 0.85rem;
   }
 }

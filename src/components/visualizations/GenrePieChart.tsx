@@ -1,14 +1,7 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
+import { GenreData } from "@/lib/genre-helpers";
 import "./GenrePieChart.css";
-
-export interface GenreData {
-  name: string;
-  percentage: number;
-  count: number;
-  color: string;
-  icon: string; // emoji
-}
 
 interface GenrePieChartProps {
   genres: GenreData[];
@@ -20,33 +13,6 @@ interface GenrePieChartProps {
   /** Whether to animate */
   animate?: boolean;
 }
-
-// Color palette for genres
-const genreColors = [
-  "#FFD93D", // Gold
-  "#FF6B6B", // Coral
-  "#4ECDC4", // Cyan
-  "#C44CFF", // Magenta
-  "#6C63FF", // Electric
-  "#FF9F66", // Orange
-  "#95E1D3", // Mint
-  "#F38181", // Pink
-];
-
-const genreIcons: Record<string, string> = {
-  "Sci-Fi": "🚀",
-  "Science Fiction": "🚀",
-  Drama: "🎭",
-  Comedy: "😂",
-  Action: "💥",
-  Horror: "👻",
-  Thriller: "🔪",
-  Romance: "💕",
-  Documentary: "📹",
-  Animation: "🎨",
-  Fantasy: "✨",
-  Mystery: "🔍",
-};
 
 export const GenrePieChart = ({
   genres,
@@ -102,11 +68,7 @@ export const GenrePieChart = ({
   return (
     <div className="genre-pie-chart">
       <div className="genre-chart-container">
-        <svg
-          viewBox="0 0 300 300"
-          className="genre-svg"
-          style={{ maxWidth: "300px", width: "100%" }}
-        >
+        <svg viewBox="0 0 300 300" className="genre-svg">
           {segments.map((segment, index) => (
             <motion.path
               key={segment.name}
@@ -114,8 +76,12 @@ export const GenrePieChart = ({
               fill={segment.color}
               stroke="var(--bg-void)"
               strokeWidth="2"
-              initial={animate ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }}
-              animate={animate ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+              initial={
+                animate ? { opacity: 0, scale: 0 } : { opacity: 1, scale: 1 }
+              }
+              animate={
+                animate ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }
+              }
               transition={{
                 delay: index * 0.1,
                 duration: 0.6,
@@ -160,7 +126,9 @@ export const GenrePieChart = ({
             />
             <div className="genre-legend-text">
               <span className="genre-legend-name">{genre.name}</span>
-              <span className="genre-legend-percentage">{genre.percentage}%</span>
+              <span className="genre-legend-percentage">
+                {genre.percentage}%
+              </span>
             </div>
           </motion.div>
         ))}
@@ -188,29 +156,3 @@ export const GenrePieChart = ({
     </div>
   );
 };
-
-// Helper function to get genre icon
-export function getGenreIcon(genreName: string): string {
-  return genreIcons[genreName] || "📺";
-}
-
-// Helper function to prepare genre data
-export function prepareGenreData(
-  genreCounts: Map<string, number>,
-  totalItems: number
-): GenreData[] {
-  const sortedGenres = Array.from(genreCounts.entries())
-    .map(([name, count]) => ({
-      name,
-      count,
-      percentage: (count / totalItems) * 100,
-    }))
-    .sort((a, b) => b.count - a.count)
-    .slice(0, 6); // Top 6 genres
-
-  return sortedGenres.map((genre, index) => ({
-    ...genre,
-    color: genreColors[index % genreColors.length],
-    icon: getGenreIcon(genre.name),
-  }));
-}

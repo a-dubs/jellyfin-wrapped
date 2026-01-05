@@ -1,12 +1,8 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { StorySlide } from "../story";
-import {
-  GenrePieChart,
-  GenreData,
-  prepareGenreData,
-  getGenreIcon,
-} from "../visualizations/GenrePieChart";
+import { GenrePieChart } from "../visualizations/GenrePieChart";
+import { GenreData, prepareGenreData, getGenreIcon } from "@/lib/genre-helpers";
 import { useMovies } from "@/hooks/queries/useMovies";
 import { useShows } from "@/hooks/queries/useShows";
 import { LoadingSpinner } from "../LoadingSpinner";
