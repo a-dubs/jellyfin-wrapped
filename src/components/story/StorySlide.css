@@ -6,14 +6,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: var(--space-xl);
+  padding: 5dvh var(--space-xl);
   overflow: hidden;
   flex-shrink: 0;
 }
 
 @media (max-width: 640px) {
   .story-slide {
-    padding: var(--space-lg);
+    padding: 5dvh var(--space-md);
   }
 }
 
@@ -59,13 +59,15 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 90dvh;
   max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin: auto;
 }
 
 .story-slide-hint {
